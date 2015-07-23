@@ -10,3 +10,7 @@ insecure
 mquandalle:jade
 coffeescript
 less
+iron:router
+alanning:roles
+accounts-ui
+accounts-password
