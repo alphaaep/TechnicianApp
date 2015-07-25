@@ -5,8 +5,6 @@
 # but you can also edit it by hand.
 
 meteor-platform
-autopublish
-insecure
 mquandalle:jade
 coffeescript
 less
@@ -14,3 +12,4 @@ iron:router
 alanning:roles
 accounts-ui
 accounts-password
+materialize:materialize
