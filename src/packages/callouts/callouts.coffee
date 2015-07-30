@@ -1,20 +1,17 @@
-@TabularTables = {}
 @Callouts = new Mongo.Collection 'callouts'
 
-Meteor.isClient and Template.registerHelper('TabularTables', TabularTables)
-TabularTables.Callouts = new Tabular.Table
+@TabularCallouts = new Tabular.Table
   name: "Callouts"
   collection: Callouts
   columns: [
     {
-      data: "clientId",
-      title: "Client",
+      data: "clientId"
+      title: "Client"
       render: (val) ->
         client = Clients.findOne(val)
         return client.name
     }
-    {
-      data: "request", title: "Request"}
+    { data: "request", title: "Request" }
     {
       data: "done"
       title: "Done"
@@ -30,7 +27,14 @@ TabularTables.Callouts = new Tabular.Table
       data: "end"
       title: "End Date"
     }
-    {data: "hours", title: "Hours"}
+    {
+      data: "hours",
+      title: "Hours",
+      render: (v, t, d) ->
+        start = moment((d.start))
+        end = moment((d.end))
+        start.diff(end, 'hours')
+    }
     {data: "cost", title: "Cost"}
     {
       data: "technicianId",
@@ -42,6 +46,7 @@ TabularTables.Callouts = new Tabular.Table
     {tmpl: Meteor.isClient and Template.editCalloutButton }
     {tmpl: Meteor.isClient and Template.deleteCalloutButton }
   ]
+Meteor.isClient && Template.registerHelper('TabularCallouts', TabularCallouts)
 
 Router.route 'callouts', {
   subscriptions: ->
@@ -90,9 +95,10 @@ if Meteor.isClient
       callout = {
         clientId: $(e.target).find('[name=client]').val()
         request: $(e.target).find('[name=request]').val()
-        done: $(e.target).find('[name=done]').val()
+        done: $(e.target).find('[name=done]').is(':checked')
         hours: $(e.target).find('[name=hours]').val()
         cost: $(e.target).find('[name=cost]').val()
+        note: $(e.target).find('[name=note]').val()
         technicianId: $(e.target).find('[name=technician]').val()
       }
       Meteor.call 'insertCallout', callout
@@ -114,7 +120,7 @@ if Meteor.isClient
       callout = @_id
       data = {
         request: $(e.target).find('[name=request]').val()
-        done: $(e.target).find('[name=done]').val()
+        done: $(e.target).find('[name=done]').is(':checked')
         start: $(e.target).find('[name=start]').val()
         end: $(e.target).find('[name=end]').val()
         hours: $(e.target).find('[name=hours]').val()
