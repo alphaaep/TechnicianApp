@@ -12,7 +12,17 @@ Package.describe({
 
 Package.onUse(function (api) {
     api.versionsFrom('1.1.0.2');
-    api.use(['coffeescript', 'mquandalle:jade', 'templating','iron:router','aldeed:tabular']);
+    api.use([
+        'coffeescript',
+        'mquandalle:jade',
+        'templating',
+        'iron:router',
+        'aldeed:tabular',
+        'manager:callouts',
+        'momentjs:moment',
+        'tsega:bootstrap3-datetimepicker@4.14.30_4'
+    ]);
+    api.addFiles('schedule.jade');
     api.addFiles('schedule.coffee');
 });
 
