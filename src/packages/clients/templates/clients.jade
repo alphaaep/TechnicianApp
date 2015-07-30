@@ -1,0 +1,84 @@
+template(name='clients')
+   .pull-left.breadcrumb_admin.clear_both
+      .pull-left.page_title.theme_color
+         h1 Clients
+         //h2 Administrators
+      .pull-right
+         a.btn.btn-primary.btn-rounded.add_client(type="button",href="{{pathFor 'addClient'}}")
+            i.fa.fa-plus
+            | New Client
+   .container.clear_both.padding_fix
+      .page-content
+         .row
+             +tabular table=TabularTables.Clients class="table table-striped"
+
+template(name="addClient")
+    .pull-left.breadcrumb_admin.clear_both
+        .pull-left.page_title.theme_color
+            a(href="{{pathFor clients}}"): h1 Clients
+            h2 New Client
+    .container.clear_both.padding_fix
+        .page-content
+            .row
+                .col-md-6: .block-web
+                    .header
+                        h3.content-header Add a new client
+                    .porlets-content
+                        form.form-horizontal.row-border.update_client
+                            .form-group
+                                .col-sm-3.control-label Name
+                                .col-sm-9: input.form-control(type='text',name='name')
+                            .form-group
+                                .col-sm-3.control-label Contact Person
+                                .col-sm-9: input.form-control(type='text',name='contact')
+                            .form-group
+                                .col-sm-3.control-label Address
+                                .col-sm-9: input.form-control(type='text',name='address')
+                            .form-group
+                                .col-sm-3.control-label Phone
+                                .col-sm-9: input.form-control(type='text',name='phone')
+                            .form-group
+                                .col-sm-3.control-label Email
+                                .col-sm-9: input.form-control(type='email',name='email')
+                            .bottom
+                                button.btn.btn-default(type='submit') Save
+                                button.btn.btn-warning(type='reset') Reset
+
+template(name="editClient")
+    .pull-left.breadcrumb_admin.clear_both
+        .pull-left.page_title.theme_color
+            a(href="{{pathFor clients}}"): h1 Clients
+            h2 Edit Client
+            h3 {{ name }}
+    .container.clear_both.padding_fix
+        .page-content
+            .row
+                .col-md-6: .block-web
+                    .header
+                        h3.content-header Edit client : {{ name }}
+                    .porlets-content
+                        form.form-horizontal.row-border.add_client(action='')
+                            .form-group
+                                .col-sm-3.control-label Name
+                                .col-sm-9: input.form-control(type='text',name='name', value="{{name}}")
+                            .form-group
+                                .col-sm-3.control-label Contact Person
+                                .col-sm-9: input.form-control(type='text',name='contact', value="{{contact}}")
+                            .form-group
+                                .col-sm-3.control-label Address
+                                .col-sm-9: input.form-control(type='text',name='address', value="{{address}}")
+                            .form-group
+                                .col-sm-3.control-label Phone
+                                .col-sm-9: input.form-control(type='text',name='phone', value="{{phone}}")
+                            .form-group
+                                .col-sm-3.control-label Email
+                                .col-sm-9: input.form-control(type='email',name='email', value="{{email}}")
+                            .bottom
+                                button.btn.btn-default(type='submit') Save
+                                button.btn.btn-warning(type='reset') Reset
+
+template(name="editClientButton")
+    button.btn.btn-default.edit(style="margin: auto 10px") Edit
+
+template(name="deleteClientButton")
+    button.btn.btn-danger.delete(style="margin: auto 10px") Delete
