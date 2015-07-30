@@ -1,0 +1,104 @@
+template(name='callouts')
+    .pull-left.breadcrumb_admin.clear_both
+        .pull-left.page_title.theme_color
+            h1 Callouts
+            //h2 Administrators
+        .pull-right
+            a.btn.btn-primary.btn-rounded.add_client(type="button",href="{{pathFor 'addCallout'}}")
+                i.fa.fa-plus
+                | New Callout
+    .container.clear_both.padding_fix
+        .page-content
+            .row
+                +tabular table=TabularTables.Callouts class="table table-striped"
+template(name="addCallout")
+    .pull-left.breadcrumb_admin.clear_both
+        .pull-left.page_title.theme_color
+            a(href="{{pathFor 'callouts'}}"): h1 Callouts
+            h2 New Callout
+    .container.clear_both.padding_fix
+        .page-content
+            .row
+                .col-md-6: .block-web
+                    .header
+                        h3.content-header Add a new callout
+                    .porlets-content
+                        form.form-horizontal.row-border
+                            .form-group
+                                .col-sm-3.control-label Client
+                                .col-sm-9: select.form-control(name="client")
+                                    optgroup(label="Clients")
+                                        +each clients
+                                            option(value="{{_id}}") {{name}}
+                            .form-group
+                                .col-sm-3.control-label Request
+                                .col-sm-9: input.form-control(type='text',name='request')
+                            .form-group
+                                .col-sm-3.control-label Done
+                                .col-sm-9: input.form-control(type='checkbox',name='done')
+                            .form-group
+                                .col-sm-3.control-label Hours
+                                .col-sm-9: input.form-control(type='text',name='hours')
+                            .form-group
+                                .col-sm-3.control-label Cost
+                                .col-sm-9: input.form-control(type='number',name='cost')
+                            .form-group
+                                .col-sm-3.control-label Technician: {{ technician.profile.name }}
+                                .col-sm-9: select.form-control(name="technician")
+                                    optgroup(label="Technicians")
+                                        +each technicians
+                                            option(value="{{_id}}") {{profile.name}}
+                            .bottom
+                                button.btn.btn-default(type='submit') Save
+                                button.btn.btn-warning(type='reset') Reset
+template(name="editCallout")
+    .pull-left.breadcrumb_admin.clear_both
+        .pull-left.page_title.theme_color
+            a(href="{{pathFor 'callouts'}}"): h1 Callouts
+            h2 Edit Callout
+            h3 {{ client.name }}
+    .container.clear_both.padding_fix
+        .page-content
+            .row
+                .col-md-6: .block-web
+                    .header
+                        h3.content-header Edit callout
+                    .porlets-content
+                        form.form-horizontal.row-border
+                            form.form-horizontal.row-border
+                            .form-group
+                                .col-sm-3.control-label Request
+                                .col-sm-9: input.form-control(type='text',name='request', value="{{request}}")
+                            .form-group
+                                .col-sm-3.control-label Done
+                                .col-sm-9: input.form-control(type='checkbox',name='done', checked="{{done}}")
+                            .form-group
+                                .col-sm-3.control-label Start
+                                .col-sm-9: .input-group.datetimepicker
+                                    span.input-group-addon: i.fa.fa-calendar
+                                    input.set-due-date.form-control(type='text',name='start',value="{{start}}")
+                            .form-group
+                                .col-sm-3.control-label End
+                                .col-sm-9: .input-group.datetimepicker
+                                    span.input-group-addon: i.fa.fa-calendar
+                                    input.set-due-date.form-control(type='text',name='end',value="{{end}}")
+                            .form-group
+                                .col-sm-3.control-label Hours
+                                .col-sm-9: input.form-control(type='number',name='hours', value="{{hours}}")
+                            .form-group
+                                .col-sm-3.control-label Cost
+                                .col-sm-9: input.form-control(type='number',name='cost', value="{{cost}}")
+                            .form-group
+                                .col-sm-3.control-label Technician : {{ technician.profile.name }}
+                                .col-sm-9: select.form-control(name="technician")
+                                    optgroup(label="Technicians")
+                                        +each technicians
+                                            option(value="{{_id}}" selected="{{isAssigned ../technicianId }}") {{profile.name}}
+                            .bottom
+                                button.btn.btn-default(type='submit') Save
+                                button.btn.btn-warning(type='reset') Reset
+
+template(name="editCalloutButton")
+    button.btn.btn-default.edit(style="margin: auto 10px") Edit
+template(name="deleteCalloutButton")
+    button.btn.btn-danger.delete(style="margin: auto 10px") Delete
