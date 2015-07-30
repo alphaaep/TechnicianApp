@@ -5,11 +5,4 @@
 # but you can also edit it by hand.
 
 meteor-platform
-mquandalle:jade
-coffeescript
-less
-iron:router
-alanning:roles
-accounts-ui
-accounts-password
-materialize:materialize
+techapp:techapp
