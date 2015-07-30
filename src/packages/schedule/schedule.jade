@@ -1,0 +1,17 @@
+template(name="schedule")
+    .pull-left.breadcrumb_admin.clear_both: .pull-left.page_title.theme_color
+            h1 Schedule
+            //h2 Administrators
+        //.pull-right
+        //a.btn.btn-primary.btn-rounded.add_client(type="button",href="{{pathFor 'addClient'}}")
+            i.fa.fa-plus
+            | New Client
+    .container.clear_both.padding_fix: .page-content: .row
+                //.col-md-6: .ticket_open
+                        .ticket_open_heading
+                        .clearfix
+                        .ticket_open_grid
+                        a.ticket_open_comment
+                //.col-md-6: .ticket_open
+        //{{}}
+template(name="scheduleItem")
