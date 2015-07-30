@@ -10,7 +10,7 @@ template(name='callouts')
     .container.clear_both.padding_fix
         .page-content
             .row
-                +tabular table=TabularTables.Callouts class="table table-striped"
+                +tabular table=TabularCallouts class="table table-striped"
 template(name="addCallout")
     .pull-left.breadcrumb_admin.clear_both
         .pull-left.page_title.theme_color
@@ -65,7 +65,6 @@ template(name="editCallout")
                         h3.content-header Edit callout
                     .porlets-content
                         form.form-horizontal.row-border
-                            form.form-horizontal.row-border
                             .form-group
                                 .col-sm-3.control-label Request
                                 .col-sm-9: input.form-control(type='text',name='request', value="{{request}}")
@@ -82,9 +81,6 @@ template(name="editCallout")
                                 .col-sm-9: .input-group.datetimepicker
                                     span.input-group-addon: i.fa.fa-calendar
                                     input.set-due-date.form-control(type='text',name='end',value="{{end}}")
-                            .form-group
-                                .col-sm-3.control-label Hours
-                                .col-sm-9: input.form-control(type='number',name='hours', value="{{hours}}")
                             .form-group
                                 .col-sm-3.control-label Cost
                                 .col-sm-9: input.form-control(type='number',name='cost', value="{{cost}}")
