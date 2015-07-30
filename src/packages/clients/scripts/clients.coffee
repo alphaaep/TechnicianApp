@@ -1,8 +1,6 @@
-@TabularTables = {}
 @Clients = new Mongo.Collection 'clients'
 
-Meteor.isClient and Template.registerHelper('TabularTables', TabularTables)
-TabularTables.Clients = new Tabular.Table
+@TabularClients = new Tabular.Table
   name: "Clients"
   collection: Clients
   columns: [
@@ -14,6 +12,7 @@ TabularTables.Clients = new Tabular.Table
     {tmpl: Meteor.isClient and Template.editClientButton }
     {tmpl: Meteor.isClient and Template.deleteClientButton }
   ]
+Meteor.isClient and Template.registerHelper 'TabularClients', TabularClients
 
 Router.route 'clients', {
   subscriptions: ->
