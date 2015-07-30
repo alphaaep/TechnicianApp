@@ -13,7 +13,7 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.1.0.2');
   api.use(['ultimo:ultimo', 'coffeescript', 'alanning:roles', 'accounts-base', 'accounts-password', 'iron:router', 'less'], ['client', 'server']);
-  api.use(['templating', 'mquandalle:jade']);
+  api.use(['templating', 'mquandalle:jade', 'alphashuro:logger']);
   api.addFiles(['templates/users.jade', 'styles/styles.less'], 'client');
   api.addFiles('scripts/seed/users.coffee', 'server');
   api.addFiles('scripts/users.coffee');
