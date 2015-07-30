@@ -14,7 +14,7 @@ Package.onUse(function (api) {
     api.versionsFrom('1.1.0.2');
     api.use(['templating', 'iron:router', 'coffeescript', 'less', 'mquandalle:jade','ultimo:user','techapp:core','techapp:admin','techapp:manager','techapp:technician']);
     api.addFiles(['styles/styles.less', 'templates/app.jade'], 'client');
-    api.addFiles(['scripts/techapp.coffee','scripts/var.js']);
+    api.addFiles(['scripts/techapp.coffee']);
 
     //api.addFiles([''], 'server');
 });
