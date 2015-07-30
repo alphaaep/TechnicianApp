@@ -12,7 +12,15 @@ Package.describe({
 
 Package.onUse(function (api) {
     api.versionsFrom('1.1.0.2');
-    api.use(['mquandalle:jade', 'aldeed:tabular', 'coffeescript', 'templating', 'mongo', 'iron:router']);
+    api.use([
+        'techapp:core',
+        'mquandalle:jade',
+        'aldeed:tabular',
+        'coffeescript',
+        'templating',
+        'mongo',
+        'iron:router'
+    ]);
     api.addFiles('templates/clients.jade');
     api.addFiles('scripts/clients.coffee');
 });
