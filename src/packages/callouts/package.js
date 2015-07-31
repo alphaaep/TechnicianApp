@@ -24,7 +24,8 @@ Package.onUse(function (api) {
         'mizzao:jquery-ui',
         'momentjs:moment',
         'tsega:bootstrap3-datetimepicker@4.14.30_4',
-        'dburles:collection-helpers@1.0.3'
+        'dburles:collection-helpers@1.0.3',
+        'matb33:collection-hooks@0.7.13'
     ]);
     api.addFiles([
         'callouts.jade'
