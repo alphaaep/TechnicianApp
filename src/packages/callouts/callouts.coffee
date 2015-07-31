@@ -1,4 +1,5 @@
 @Callouts = new Mongo.Collection 'callouts'
+Callouts.timestampable()
 
 @TabularCallouts = new Tabular.Table
   name: "Callouts"
@@ -31,9 +32,9 @@
       data: "hours",
       title: "Hours",
       render: (v, t, d) ->
-        start = moment((d.start))
-        end = moment((d.end))
-        start.diff(end, 'hours')
+        start = moment(new Date(d.start))
+        end = moment(new Date(d.end))
+        end.diff(start, 'hours')
     }
     {data: "cost", title: "Cost"}
     {
@@ -131,6 +132,13 @@ if Meteor.isClient
       Router.go 'callouts'
   Template.editCallout.onRendered ->
     @$('.datetimepicker').datetimepicker()
+
+Callouts.before.insert (userId, doc) ->
+  Logger.logInsert doc, 'callouts'
+Callouts.before.update (userId, doc, fieldName, modifier) ->
+  Logger.logUpdate doc, modifier, 'callouts'
+Callouts.before.remove (userId, doc) ->
+  Logger.logRemove doc, 'callouts'
 
 if Meteor.isServer
   Meteor.publish 'callouts', ->
