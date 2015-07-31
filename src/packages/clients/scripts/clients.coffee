@@ -1,4 +1,5 @@
 @Clients = new Mongo.Collection 'clients'
+Clients.timestampable()
 
 @TabularClients = new Tabular.Table
   name: "Clients"
