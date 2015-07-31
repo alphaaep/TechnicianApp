@@ -66,6 +66,13 @@ if Meteor.isClient
       Meteor.call 'updateClient', client, data
       Router.go 'clients'
 
+Clients.before.insert (userId, doc) ->
+  Logger.logInsert doc, 'clients'
+Clients.before.update (userId, doc, fieldName, modifier) ->
+  Logger.logUpdate doc, modifier, 'clients'
+Clients.before.remove (userId, doc) ->
+  Logger.logRemove doc, 'clients'
+
 if Meteor.isServer
   Meteor.publish 'clients', ->
     Clients.find()
