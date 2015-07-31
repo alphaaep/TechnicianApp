@@ -1,5 +1,5 @@
 @Callouts = new Mongo.Collection 'callouts'
-Callouts.timestampable()
+#Callouts.timestampable()
 
 @TabularCallouts = new Tabular.Table
   name: "Callouts"
@@ -133,11 +133,11 @@ if Meteor.isClient
   Template.editCallout.onRendered ->
     @$('.datetimepicker').datetimepicker()
 
-Callouts.before.insert (userId, doc) ->
+Callouts.after.insert (userId, doc) ->
   Logger.logInsert doc, 'callouts'
-Callouts.before.update (userId, doc, fieldName, modifier) ->
-  Logger.logUpdate doc, modifier, 'callouts'
-Callouts.before.remove (userId, doc) ->
+Callouts.after.update (userId, doc, fieldName, modifier, o) ->
+  Logger.logUpdate this.previous, doc, 'callouts'
+Callouts.after.remove (userId, doc) ->
   Logger.logRemove doc, 'callouts'
 
 if Meteor.isServer

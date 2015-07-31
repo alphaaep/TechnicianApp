@@ -1,5 +1,5 @@
 @Clients = new Mongo.Collection 'clients'
-Clients.timestampable()
+#Clients.timestampable()
 
 @TabularClients = new Tabular.Table
   name: "Clients"
@@ -67,11 +67,11 @@ if Meteor.isClient
       Meteor.call 'updateClient', client, data
       Router.go 'clients'
 
-Clients.before.insert (userId, doc) ->
+Clients.after.insert (userId, doc) ->
   Logger.logInsert doc, 'clients'
-Clients.before.update (userId, doc, fieldName, modifier) ->
-  Logger.logUpdate doc, modifier, 'clients'
-Clients.before.remove (userId, doc) ->
+Clients.after.update (userId, doc, fieldName, modifier,o) ->
+  Logger.logUpdate this.previous, doc, 'clients'
+Clients.after.remove (userId, doc) ->
   Logger.logRemove doc, 'clients'
 
 if Meteor.isServer

@@ -5,8 +5,8 @@ Logger.Log.softRemovable()
 Logger.logInsert = (doc, collection)->
  Meteor.call 'logInsert', doc, collection
 
-Logger.logUpdate = (d, m, col) ->
- Meteor.call 'logUpdate', d, m, col
+Logger.logUpdate = (oldD, newD, col) ->
+ Meteor.call 'logUpdate', oldD, newD, col
 
 Logger.logRemove = (d, col) ->
   Meteor.call 'logRemove', d, col
@@ -23,13 +23,13 @@ if Meteor.isServer
         col: colName
         doc: doc
       Logger.Log.insert log
-    logUpdate: (d, m, colName) ->
+    logUpdate: (oldD, newD, colName) ->
       log =
         userId: @userId
         type: 'update'
         col: colName
-        old: d
-        mod: m
+        old: oldD
+        new: newD
       Logger.Log.insert log
     logRemove: (doc, colName) ->
       log =
