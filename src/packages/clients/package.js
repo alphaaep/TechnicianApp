@@ -13,13 +13,15 @@ Package.describe({
 Package.onUse(function (api) {
     api.versionsFrom('1.1.0.2');
     api.use([
+        'alpha:logger',
         'techapp:core',
         'mquandalle:jade',
         'aldeed:tabular',
         'coffeescript',
         'templating',
         'mongo',
-        'iron:router'
+        'iron:router',
+        'matb33:collection-hooks@0.7.13'
     ]);
     api.addFiles('templates/clients.jade');
     api.addFiles('scripts/clients.coffee');
