@@ -79,3 +79,6 @@ if Meteor.isClient
       }
       Meteor.call 'updateCallout', callout, data
       Router.go 'schedule'
+
+  Template.completeCallout.onRendered ->
+    @$('.datetimepicker').datetimepicker()
