@@ -21,6 +21,7 @@ Package.onUse(function (api) {
         'templating',
         'mongo',
         'iron:router',
+        'dburles:collection-helpers@1.0.3',
         'matb33:collection-hooks@0.7.13'
     ]);
     api.addFiles('templates/clients.jade');
