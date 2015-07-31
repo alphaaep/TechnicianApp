@@ -28,8 +28,8 @@ if Meteor.isServer
         userId: @userId
         type: 'update'
         col: colName
-        old: oldDoc
-        new: newDoc
+        old: d
+        mod: m
       Logger.Log.insert log
     logRemove: (doc, colName) ->
       log =
