@@ -23,7 +23,8 @@ Package.onUse(function (api) {
         'alanning:roles',
         'mizzao:jquery-ui',
         'momentjs:moment',
-        'tsega:bootstrap3-datetimepicker@4.14.30_4'
+        'tsega:bootstrap3-datetimepicker@4.14.30_4',
+        'dburles:collection-helpers@1.0.3'
     ]);
     api.addFiles([
         'callouts.jade'
