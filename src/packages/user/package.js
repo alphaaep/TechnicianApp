@@ -12,8 +12,22 @@ Package.describe({
 
 Package.onUse(function (api) {
     api.versionsFrom('1.1.0.2');
-    api.use(['ultimo:ultimo', 'coffeescript', 'accounts-base', 'accounts-password','iron:router', 'alanning:roles'], ['client', 'server']);
-    api.use(['templating', 'mquandalle:jade'], 'client');
+    api.use([
+
+        'ultimo:ultimo',
+        'coffeescript',
+        'accounts-base',
+        'accounts-password',
+        'iron:router',
+        'alanning:roles',
+        'alpha:logger'
+
+    ], ['client', 'server']);
+    api.use([
+        'templating',
+        'momentjs:moment',
+        'mquandalle:jade'
+    ], 'client');
 
     api.addFiles([
 
@@ -23,6 +37,9 @@ Package.onUse(function (api) {
         'client/templates/profile/profile.jade',
         'client/templates/profile/events.coffee',
         'client/templates/profile/helpers.coffee',
+
+        'client/templates/profile/activity/activity.jade',
+        'client/templates/profile/activity/helpers.coffee',
 
         'client/templates/profileMini/profileMini.jade',
         'client/templates/profileMini/events.coffee',

@@ -79,19 +79,8 @@ template(name="profile")
                            button.btn.btn-primary(type="submit") Save
                      #activities.tab-pane.animated.fadeInRight
                         ul.media-list
-                           li.media: p
-                              a(href="#"): strong {{profile.name}}
-                              | assigned
-                              a(href="#"): strong _technician_
-                              | to
-                              a(href="#"): strong _client_
-                              | 's callout
-                              a(href="#"): _callout_
-                              i 30 minutes ago
-                           li.media: p
-                              a(href="#"): strong {{profile.name}}
-                              | created user
-                              a(href="#"): strong _user name_
-                              | with roles
-                              a(href="#"): strong _roles_
-                              i yesterday
+                           +if hasNoActivity
+                              | You have not done anything yet
+                           +else
+                              +each activities
+                                 +profileActivity

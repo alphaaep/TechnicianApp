@@ -34,7 +34,6 @@ Package.onUse(function (api) {
         'mquandalle:jade',
         'less',
         'momentjs:moment'
-
         ],
         'client'
     );
