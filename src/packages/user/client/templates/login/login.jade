@@ -1,0 +1,16 @@
+template(name="login")
+   .wrapper
+      .login_page
+         .login_content
+            .panel-heading.border.login_heading Sign In
+            form.form-horizontal(role="form")
+               .form-group
+                  .col-sm-10
+                     input#inputEmail3.form-control(name="email",type="text",placeholder="email")
+               .form-group
+                  .col-sm-10
+                     input#inputPassword3.form-control(name="password",type="password",placeholder="Password")
+               .form-group
+                  .col-sm-10
+                     .checkbox.checkbox_margin
+                        button.btn.btn-default.pull-right(type="submit") Sign in
