@@ -24,7 +24,7 @@ Router.route 'technicians', {
 }
 
 Router.route 'all', {
-  path: '/allUsers'
+  path: '/all'
   subscriptions: ->
     @subscribe 'users'
   waitOn: -> Meteor.subscribe 'users'
