@@ -1,7 +1,7 @@
 template(name="userDetails")
     .pull-left.breadcrumb_admin.clear_both
         .pull-left.page_title.theme_color
-            h1 Users
+            h1: a(href="{{ pathFor 'admins' }}") Users
             h2 {{ profile.name }}
     .container.clear_both.padding_fix
         .page-content
