@@ -12,8 +12,12 @@ Package.describe({
 
 Package.onUse(function (api) {
     api.versionsFrom('1.1.0.2');
-    api.use(['coffeescript','mongo','sewdn:collection-behaviours@0.2.0']);
-    api.addFiles(['var.js','logger.coffee']);
+    api.use([
+        'coffeescript',
+        'mongo',
+        'sewdn:collection-behaviours@0.2.0',
+        'dburles:collection-helpers@1.0.3']);
+    api.addFiles(['var.js','logger.coffee'], ['client','server']);
     api.export('Logger', ['client','server'])
 });
 
