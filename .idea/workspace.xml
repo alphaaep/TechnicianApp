@@ -580,12 +580,6 @@
       <option name="number" value="Default" />
       <updated>1437685230624</updated>
     </task>
-    <task id="LOCAL-00032" summary="added route for schedule&#10;">
-      <created>1438238449834</created>
-      <option name="number" value="00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1438238449834</updated>
-    </task>
     <task id="LOCAL-00033" summary="added template for schedule">
       <created>1438238462085</created>
       <option name="number" value="00033" />
@@ -874,7 +868,13 @@
       <option name="project" value="LOCAL" />
       <updated>1438591041173</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="autogen">
+      <created>1438591045848</created>
+      <option name="number" value="00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1438591045848</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TodoView">
