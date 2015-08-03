@@ -26,7 +26,8 @@ Package.onUse(function (api) {
     api.use([
         'templating',
         'momentjs:moment',
-        'mquandalle:jade'
+        'mquandalle:jade',
+        'chrismbeckett:toastr@2.1.0'
     ], 'client');
 
     api.addFiles([
