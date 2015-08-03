@@ -12,10 +12,10 @@ template(name="schedule")
             .row
                 .col-md-6: .ticket_open
                     h1 Not Done
-                    +tabular table=TabularSchedule selector=notDoneSelector class="table table-striped"
+                    +tabular table=Tables.CalloutsNotDone selector=notDoneSelector class="table table-striped"
                 .col-md-6: .ticket_open
                     h1 Done
-                    +tabular table=TabularSchedule selector=doneSelector class="table table-striped"
+                    +tabular table=Tables.CalloutsDone selector=doneSelector class="table table-striped"
 
 template(name='calloutDoneButton')
     a.btn.btn-success(href="{{pathFor 'completeCallout' _id=this._id}}") {{ text }}

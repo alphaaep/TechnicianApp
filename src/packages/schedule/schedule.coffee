@@ -1,9 +1,31 @@
-@TabularSchedule = new Tabular.Table
-  name: "Schedule"
+@Tables = {}
+
+Meteor.isClient && Template.registerHelper 'Tables', Tables
+
+Tables.CalloutsNotDone = new Tabular.Table
+  name: "Callouts Not Done"
   collection: Callouts
-  selector: ->
-    { technicianId: Id }
-  extraFields: ['done']
+  extraFields: ['done', 'clientId','end']
+  columns: [
+    {
+      data: "clientId"
+      title: "Client"
+      render: (val) ->
+        client = Clients.findOne(val)
+        return client.name
+    }
+    { data: "request", title: "Request" }
+    {
+      data: "start"
+      title: "Start Time"
+    }
+    { tmpl: Meteor.isClient and Template.calloutDoneButton }
+  ]
+
+Tables.CalloutsDone = new Tabular.Table
+  name: 'Callouts Done'
+  collection: Callouts
+  extraFields: ['done', 'clientId']
   columns: [
     {
       data: "clientId"
@@ -18,8 +40,8 @@
       title: "Start Time"
     }
     {
-      data: "end"
-      title: "End Time"
+      data: 'end'
+      title: 'End Time'
     }
     {
       title: 'Hours'
@@ -29,10 +51,9 @@
         end.diff(start, 'hours')
     }
     { tmpl: Meteor.isClient and Template.calloutDoneButton }
+
   ]
 
-
-Meteor.isClient && Template.registerHelper 'TabularSchedule', TabularSchedule
 
 Router.route 'schedule',{
   path: '/schedule'
