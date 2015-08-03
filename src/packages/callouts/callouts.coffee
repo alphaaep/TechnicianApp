@@ -27,10 +27,20 @@ Callouts.helpers
     {
       data: "start"
       title: "Start Date"
+      render: (val) ->
+        if val
+          moment(new Date val).calendar()
+        else
+          'Not set'
     }
     {
       data: "end"
       title: "End Date"
+      render: (val) ->
+        if val
+          moment(new Date val).calendar()
+        else
+          'Not done'
     }
     {
       data: "hours",

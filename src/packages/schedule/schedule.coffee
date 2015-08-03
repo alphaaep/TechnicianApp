@@ -18,6 +18,11 @@ Tables.CalloutsNotDone = new Tabular.Table
     {
       data: "start"
       title: "Start Time"
+      render: (val) ->
+        if val
+          moment(new Date val).calendar()
+        else
+          'Not set'
     }
     { tmpl: Meteor.isClient and Template.calloutDoneButton }
   ]
@@ -38,10 +43,20 @@ Tables.CalloutsDone = new Tabular.Table
     {
       data: "start"
       title: "Start Time"
+      render: (val) ->
+        if val
+          moment(new Date val).calendar()
+        else
+          'Not set'
     }
     {
       data: 'end'
       title: 'End Time'
+      render: (val) ->
+        if val
+          moment(new Date val).calendar()
+        else
+          'Not set'
     }
     {
       title: 'Hours'
