@@ -20,7 +20,7 @@ Package.onUse(function (api) {
         'templating',
         'mongo',
         'iron:router',
-        'aldeed:tabular',
+        'aldeed:tabular@1.2.0',
         'alanning:roles',
         'mizzao:jquery-ui',
         'momentjs:moment',
