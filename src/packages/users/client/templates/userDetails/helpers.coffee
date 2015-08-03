@@ -7,5 +7,7 @@ Template.userDetails.helpers
     Roles.userIsInRole(@_id, 'manager')
   isTechnician: ->
     Roles.userIsInRole(@_id, 'technician')
+  hasNoActivity: ->
+    Logger.Log.find(userId: @_id).count() is 0
   activities: ->
-    activity = Logger.Log.find({userId: @_id})
+    Logger.Log.find userId: @_id

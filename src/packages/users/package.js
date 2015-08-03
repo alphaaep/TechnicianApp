@@ -18,6 +18,7 @@ Package.onUse(function (api) {
     api.use([
         'ultimo:ultimo',
         'coffeescript',
+        'techapp:core',
         'alanning:roles',
         'accounts-base',
         'accounts-password',
@@ -25,13 +26,15 @@ Package.onUse(function (api) {
         'alpha:logger',
         'dburles:collection-helpers@1.0.3',
         'matb33:collection-hooks@0.7.13',
-        'reywood:publish-composite@1.3.6'
+        'reywood:publish-composite@1.3.6',
     ], ['client', 'server']);
     // client
     api.use([
         'templating',
         'mquandalle:jade',
-        'less'
+        'less',
+        'momentjs:moment'
+
         ],
         'client'
     );
@@ -50,6 +53,9 @@ Package.onUse(function (api) {
         'client/templates/userDetails/userDetails.jade',
         'client/templates/userDetails/helpers.coffee',
         'client/templates/userDetails/events.coffee',
+
+        'client/templates/userDetails/activity/activity.jade',
+        'client/templates/userDetails/activity/helpers.coffee',
 
         'client/templates/globalHelpers.coffee',
 
