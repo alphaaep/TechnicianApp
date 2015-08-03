@@ -1,15 +1,19 @@
 @Callouts = new Mongo.Collection 'callouts'
-#Callouts.timestampable()
+
+Callouts.helpers
+  client: ->
+    Clients.findOne @clientId
+  technician: ->
+    Meteor.users.findOne @technicianId
 
 @TabularCallouts = new Tabular.Table
   name: "Callouts"
   collection: Callouts
   columns: [
     {
-      data: "clientId"
+      data: "client()"
       title: "Client"
-      render: (val) ->
-        client = Clients.findOne(val)
+      render: (client) ->
         return client.name
     }
     { data: "request", title: "Request" }
@@ -38,15 +42,15 @@
     }
     {data: "cost", title: "Cost"}
     {
-      data: "technicianId",
+      data: "technician()",
       title: "Technician",
-      render: (val) ->
-        user =  Meteor.users.findOne val
-        return user.profile.name
+      render: (technician) ->
+        return technician.profile.name
     }
     {tmpl: Meteor.isClient and Template.editCalloutButton }
     {tmpl: Meteor.isClient and Template.deleteCalloutButton }
   ]
+  extraFields: ['clientId', 'technicianId']
 Meteor.isClient && Template.registerHelper('TabularCallouts', TabularCallouts)
 
 Router.route 'callouts', {
