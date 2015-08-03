@@ -13,14 +13,37 @@ Package.describe({
 Package.onUse(function (api) {
     api.versionsFrom('1.1.0.2');
     api.use(['templating', 'alanning:roles', 'iron:router', 'coffeescript', 'less', 'mquandalle:jade','ultimo:user','techapp:core','techapp:admin','techapp:manager','techapp:technician']);
-    api.addFiles(['styles/styles.less', 'templates/app.jade'], 'client');
-    api.addFiles(['scripts/techapp.coffee']);
+    api.addFiles([
 
-    //api.addFiles([''], 'server');
+        'client/styles/theme.less',
+
+        'client/templates/globalHelpers.coffee',
+
+        'client/templates/brand/brand.jade',
+
+        'client/templates/head/head.jade',
+
+        'client/templates/layout/layout.jade',
+
+        'client/templates/nav/nav.jade',
+        'client/templates/nav/helpers.coffee',
+
+            'client/templates/nav/link/link.jade',
+            'client/templates/nav/menu/menu.jade'
+
+    ], 'client');
+
+    api.addFiles([
+
+        'both/router/config.coffee',
+        'both/router/controller.coffee',
+        'both/router/routes.coffee',
+
+    ],['client','server'])
 });
 
 Package.onTest(function (api) {
     api.use('tinytest');
     api.use('techapp:techapp');
-    api.addFiles('techapp-tests.js');
+    api.addFiles('tests/techapp-tests.js');
 });

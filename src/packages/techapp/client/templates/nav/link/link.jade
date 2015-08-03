@@ -1,0 +1,5 @@
+template(name="navLink")
+   li: a(href="{{ pathFor link params}}")
+      span
+      i.fa.fa-circle(class="{{ isActiveRoute link }}")
+      b(class="{{ isActiveRoute link }}") {{ title }}

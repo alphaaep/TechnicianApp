@@ -1,0 +1,11 @@
+template(name="navMenu")
+   +if isInRole role
+      a(href='#')
+         i.fa(class="{{icon}}")
+         |  {{title}}
+         span.left_nav_pointer
+         span.plus
+            i.fa.fa-plus
+      ul.opened(style='display:block')
+         +each links
+            +navLink
