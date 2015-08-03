@@ -13,10 +13,14 @@ Package.describe({
 Package.onUse(function (api) {
     api.versionsFrom('1.1.0.2');
     api.use(['coffeescript', 'mquandalle:jade', 'techapp:core', 'technician:schedule']);
-    api.addFiles('technician.coffee');
+    api.addFiles([
+
+        'client/nav/navItems.coffee'
+
+    ],'client');
 });
 
 Package.onTest(function (api) {
     api.use(['tinytest', 'techapp:technician']);
-    api.addFiles('technician-tests.js');
+    api.addFiles('tests/technician-tests.js');
 });
