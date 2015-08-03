@@ -1,4 +1,7 @@
 Logger.Log = new Mongo.Collection 'log'
+Logger.Log.helpers
+  user: ->
+    Meteor.users.findOne @userId
 Logger.Log.timestampable()
 Logger.Log.softRemovable()
 
@@ -12,7 +15,7 @@ Logger.logRemove = (d, col) ->
   Meteor.call 'logRemove', d, col
 
 if Meteor.isServer
-  Meteor.publish ->
+  Meteor.publish null, ->
     Logger.Log.find()
 
   Meteor.methods
