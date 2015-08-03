@@ -62,17 +62,17 @@ Package.onUse(function (api) {
         'client/templates/all/all.jade',
 
         'client/templates/admins/admins.jade',
-        'client/templates/admins/helpers.coffee',
+        //'client/templates/admins/helpers.coffee',
 
         'client/templates/addUser/addUser.jade',
         'client/templates/addUser/events.coffee',
         'client/templates/addUser/helpers.coffee',
 
         'client/templates/managers/managers.jade',
-        'client/templates/managers/helpers.coffee',
+        //'client/templates/managers/helpers.coffee',
 
         'client/templates/technicians/technicians.jade',
-        'client/templates/technicians/helpers.coffee'
+        //'client/templates/technicians/helpers.coffee'
         ],
         'client');
     // server

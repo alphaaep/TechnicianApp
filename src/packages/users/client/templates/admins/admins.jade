@@ -10,5 +10,5 @@ template(name="admins")
     .container.clear_both.padding_fix
         .page-content
             .row
-                +each admins
+                +each getUsers 'admin'
                     +user

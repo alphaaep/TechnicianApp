@@ -3,7 +3,7 @@ Router.route 'admins', {
   subscriptions: ->
     @subscribe 'admins'
   waitOn: -> Meteor.subscribe 'admins'
-  data:
+  data: ->
     admins: -> Roles.getUsersInRole 'admin'
 }
 
@@ -12,7 +12,8 @@ Router.route 'managers', {
   subscriptions: ->
     @subscribe 'managers'
   waitOn: -> Meteor.subscribe 'managers'
-  data: -> Roles.getUsersInRole 'admin'
+  data: ->
+    managers: -> Roles.getUsersInRole 'manager'
 }
 
 Router.route 'technicians', {
@@ -20,7 +21,8 @@ Router.route 'technicians', {
   subscriptions: ->
     @subscribe 'technicians'
   waitOn: -> Meteor.subscribe 'technicians'
-  data: -> Roles.getUsersInRole 'technician'
+  data: ->
+    technicians: -> Roles.getUsersInRole 'technician'
 }
 
 Router.route 'all', {
