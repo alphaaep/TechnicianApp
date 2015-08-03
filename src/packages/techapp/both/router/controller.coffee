@@ -1,7 +1,7 @@
 @AppController = RouteController.extend({
   onBeforeAction: ->
     if !Meteor.userId()
-      @render 'login'
+      Router.go 'login'
     else
       @next()
 });
