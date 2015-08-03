@@ -14,7 +14,7 @@ Package.onUse(function (api) {
     api.versionsFrom('1.1.0.2');
     api.use(['fortawesome:fontawesome', 'jquery', 'twbs:bootstrap', 'rochal:slimscroll']);
     api.addFiles(['css/animate.css', 'css/admin.css'], 'client');
-    api.addFiles(['js/common-script.js', 'js/jPushMenu.js', 'js/side-chats.js'], 'client');
+    api.addFiles(['js/common-script.js', 'js/jPushMenu.js'], 'client');
     api.addFiles('ultimo.js')
 });
 
