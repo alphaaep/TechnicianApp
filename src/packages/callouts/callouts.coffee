@@ -149,7 +149,7 @@ if Meteor.isClient
 
 Callouts.after.insert (userId, doc) ->
   Logger.logInsert doc, 'callouts'
-Callouts.after.update (userId, doc, fieldName, modifier, o) ->
+Callouts.after.update (userId, doc) ->
   Logger.logUpdate this.previous, doc, 'callouts'
 Callouts.after.remove (userId, doc) ->
   Logger.logRemove doc, 'callouts'
