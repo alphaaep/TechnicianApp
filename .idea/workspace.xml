@@ -580,12 +580,6 @@
       <option name="number" value="Default" />
       <updated>1437685230624</updated>
     </task>
-    <task id="LOCAL-00031" summary="added manager menu links">
-      <created>1438238349456</created>
-      <option name="number" value="00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1438238349456</updated>
-    </task>
     <task id="LOCAL-00032" summary="added route for schedule&#10;">
       <created>1438238449834</created>
       <option name="number" value="00032" />
@@ -874,7 +868,13 @@
       <option name="project" value="LOCAL" />
       <updated>1438591020850</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="autogen">
+      <created>1438591041173</created>
+      <option name="number" value="00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1438591041173</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TodoView">
@@ -946,7 +946,6 @@
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <confirmMoveToFailedCommit value="1" />
-    <MESSAGE value="added tabular tables, and completeCallout template" />
     <MESSAGE value="created logger package" />
     <MESSAGE value="added a few words to dictionary" />
     <MESSAGE value="added collection helpers, collection hooks and collection behaviours" />
@@ -971,7 +970,8 @@
     <MESSAGE value="added helper to get user, fixed publish method" />
     <MESSAGE value="added collection helpers" />
     <MESSAGE value="removed sidechats js" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed sidechats js" />
+    <MESSAGE value="autogen" />
+    <option name="LAST_COMMIT_MESSAGE" value="autogen" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
