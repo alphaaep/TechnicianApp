@@ -1,0 +1,59 @@
+template(name="schedule")
+    .pull-left.breadcrumb_admin.clear_both
+        .pull-left.page_title.theme_color
+            h1 Schedule
+            //h2 Administrators
+        //.pull-right
+        //a.btn.btn-primary.btn-rounded.add_client(type="button",href="{{pathFor 'addClient'}}")
+            i.fa.fa-plus
+            | New Client
+    .container.clear_both.padding_fix
+        .page-content
+            .row
+                .col-md-6: .ticket_open
+                    h1 Not Done
+                    +tabular table=Tables.CalloutsNotDone selector=notDoneSelector class="table table-striped"
+                .col-md-6: .ticket_open
+                    h1 Done
+                    +tabular table=Tables.CalloutsDone selector=doneSelector class="table table-striped"
+
+template(name='calloutDoneButton')
+    a.btn.btn-success(href="{{pathFor 'completeCallout' _id=this._id}}") {{ text }}
+
+template(name='completeCallout')
+    .pull-left.breadcrumb_admin.clear_both
+        .pull-left.page_title.theme_color
+            h1 Complete Callout
+            h2 {{ client }}
+    .container.clear_both.padding_fix
+        .page-content
+            .row
+                .col-md-8: .block-web
+                    .header
+                        h3.content-header Complete Callout
+                    .portlets-content
+                        form.form-horizontal.row-border
+                            .form-group
+                                .col-sm-3.control-label Request
+                                .col-sm-9: input.form-control(type='text',name='request',value="{{request}}",disabled)
+                            .form-group
+                                .col-sm-3.control-label Start
+                                .col-sm-9: .input-group.datetimepicker
+                                    span.input-group-addon: i.fa.fa-calendar
+                                    input.set-due-date.form-control(type='text',name='start',value="{{start}}")
+                            .form-group
+                                .col-sm-3.control-label End
+                                .col-sm-9: .input-group.datetimepicker
+                                    span.input-group-addon: i.fa.fa-calendar
+                                    input.set-due-date.form-control(type='text',name='end',value="{{end}}")
+                            .form-group
+                                .col-sm-3.control-label Cost
+                                .col-sm-9: input.form-control(type='number',name='cost',value="{{cost}}")
+                            .form-group
+                                .col-sm-3.control-label Note
+                                .col-sm-9: input.form-control(type='text',name='note',value="{{note}}")
+                            .form-group
+                                .col-sm-3.control-label Done
+                                .col-sm-9: input.form-control(type='checkbox',name='done', checked="{{done}}")
+                            .bottom
+                                button.btn.btn-default(type='submit') Complete

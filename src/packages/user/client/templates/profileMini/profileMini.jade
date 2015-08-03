@@ -1,0 +1,20 @@
+template(name="profileMini")
+   .header_top_bar
+      .top_right_bar
+         //.top_right
+             .top_right_menu
+         .user_admin.dropdown
+            a(href='#', data-toggle='dropdown')
+               img.user-pic(src='http://placehold.it/100')
+               span.user_adminname {{ user.profile.name }}
+               b.caret
+            ul.dropdown-menu
+               .top_pointer
+               li
+                  a(href="{{ pathFor 'profile' _id=user._id }}")
+                     i.fa.fa-user
+                     | Profile
+               li
+                  a.logout(href='#')
+                     i.fa.fa-power-off
+                     | Logout

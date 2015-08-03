@@ -1,0 +1,33 @@
+template(name="user")
+    .col-md-4
+        .profile_bg
+            .user-profile-sidebar
+                .row
+                    .col-md-4
+                        img(src="http://placehold.it/100")
+                    .col-md-8
+                        .user-identity
+                            h4: strong {{ profile.name }}
+                            p {{ email }}
+            .user-button
+                .row
+                    .col-sm-6
+                        a.btn.btn-primary.btn-rounded(type="button",href="mailto:{{ email }}",data-toggle="tooltip", data-placement="top", title="send an email to {{email}}")
+                            i.fa.fa-envelope
+                            | Send Message
+                    .col-sm-6
+                        button.btn.btn-danger.btn-rounded.delete(type="button")
+                            i.fa.fa-trash
+                            | Delete
+            h6:strong Connection
+            div
+                ul.social_icons
+                    li
+                        a(href="mailto:{{ email }}")
+                            i.fa.fa-envelope-o
+                    +if profile.skype
+                        li(data-toggle="tooltip", data-placement="top", title="{{profile.skype}}")
+                            i.fa.fa-skype
+                    +if profile.phone
+                        li(data-toggle="tooltip", data-placement="top", title="{{profile.phone}}")
+                            i.fa.fa-phone

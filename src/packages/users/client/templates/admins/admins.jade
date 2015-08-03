@@ -1,0 +1,14 @@
+template(name="admins")
+    .pull-left.breadcrumb_admin.clear_both
+        .pull-left.page_title.theme_color
+            h1 Users
+            h2 Administrators
+        .pull-right
+            a.btn.btn-primary.btn-rounded.add_user(type="button",href="{{pathFor 'addUser'}}")
+                //i.fa.fa-plus
+                | New User
+    .container.clear_both.padding_fix
+        .page-content
+            .row
+                +each getUsers 'admin'
+                    +user

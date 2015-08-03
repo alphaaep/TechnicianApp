@@ -1,0 +1,83 @@
+template(name="userDetails")
+    .pull-left.breadcrumb_admin.clear_both
+        .pull-left.page_title.theme_color
+            h1: a(href="{{ pathFor 'admins' }}") Users
+            h2 {{ profile.name }}
+    .container.clear_both.padding_fix
+        .page-content
+            .row
+                .col-md-8
+                    .block-web.full
+                        ul.nav.nav-tabs.nav-justified.nav_bg
+                            li.active: a(href="#about",data-toggle="tab")
+                                i.fa.fa-user
+                                | About
+                            li: a(href="#edit-profile",data-toggle="tab")
+                                i.fa.fa-pencil
+                                | Edit
+                            li: a(href="#activities",data-toggle="tab")
+                                i.fa.fa-laptop
+                                | Activities
+                        .tab-content
+                            #about.tab-pane.animated.fadeInRight.active: .user-profile-content
+                                h5 About {{ profile.name }}
+                                hr
+                                .row
+                                    .col-sm-6
+                                        h5: strong Contact
+                                        +if profile.phone
+                                            address
+                                                strong Phone
+                                                br
+                                                | {{ profile.phone }}
+                                        +if profile.skype
+                                            address
+                                                strong Skype
+                                                br
+                                                | {{ profile.skype }}
+                                        +each emails
+                                            address
+                                                strong Email
+                                                | {{ address }}
+                                    .col-sm-6
+                                        h5: strong Roles
+                                        +each roles
+                                            p {{ this }}
+                            #edit-profile.tab-pane.animated.fadeInRight: .user-profile-content
+                                form.edit_user(role="form")
+                                    .form-group
+                                        label(for="name") Full Name
+                                        input#name.form-control(name="name",type="text" value="{{ profile.name }}")
+                                    .form-group
+                                        label(for="email") Email
+                                        input#email.form-control(name="email",type="email" value="{{ email }}")
+                                    //.form-group
+                                    //    label(for="username") Username
+                                    //    input#username.form-control(name="username",type="text" value="{{ username }}")
+                                    .form-group
+                                        label(for="phone") Phone
+                                        input#phone.form-control(name="phone",type="text" value="{{ profile.phone }}")
+                                    .form-group
+                                        label(for="skype") Skype
+                                        input#skype.form-control(name="skype",type="text" value="{{ profile.skype }}")
+                                    .form-group
+                                        .control-label.col-sm-2 Roles
+                                        .col-sm-9
+                                            label.checkbox-inline
+                                                input#admin(name="role",type="checkbox",checked="{{isAdmin}}", value='admin')
+                                                | Admin
+                                            label.checkbox-inline
+                                                input#manager(name="role",type="checkbox",checked="{{isManager}}", value="manager")
+                                                | Manager
+                                            label.checkbox-inline
+                                                input#technician(name="role",type="checkbox",checked="{{isTechnician}}", value="technician")
+                                                | Technician
+                                    button.btn.btn-primary(type="submit") Save
+                            #activities.tab-pane.animated.fadeInRight
+                                ul.media-list
+                                    +if hasNoActivity
+                                        | This user has not done anything yet
+                                    +else
+                                        +each activities
+                                            +profileActivity
+

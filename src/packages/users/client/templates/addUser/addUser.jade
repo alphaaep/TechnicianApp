@@ -1,0 +1,50 @@
+template(name="addUser")
+    .row
+        .col-md-6
+            .block-web
+                .header
+                    .actions
+                    h3.content-header New User
+                .porlets-content
+                    form.form-horizontal.row-border(action='')
+                        .form-group
+                            label.col-sm-3.control-label Name
+                            .col-sm-9
+                                input.form-control(name="name",type='text', placeholder="First and Last Name")
+                        .form-group
+                            label.col-sm-3.control-label Email
+                            .col-sm-9
+                                .input-group
+                                    span.input-group-addon @
+                                    input.form-control(name="email",type='text', placeholder="user@domain.com")
+                        .form-group
+                            label.col-sm-3.control-label Username
+                            .col-sm-9
+                                input.form-control(name="username",type='text', placeholder="Username for logging in")
+                        .form-group
+                            label.col-sm-3.control-label Password
+                            .col-sm-9
+                                input.form-control(name="password",type='password')
+                        .form-group
+                            label.col-sm-3.control-label Phone
+                            .col-sm-9
+                                input.form-control(name="phone",type='text', placeholder='012 345 6789')
+                        .form-group
+                            label.col-sm-3.control-label Skype
+                            .col-sm-9
+                                input.form-control(name="skype",type='text', placeholder='Skype')
+                        .form-group
+                            .control-label.col-sm-3 Roles
+                            .col-sm-9
+                                label.checkbox-inline
+                                    input#admin(name="role",type="checkbox",value="admin")
+                                    | Admin
+                                label.checkbox-inline
+                                    input#manager(name="role",type="checkbox",value="manager")
+                                    | Manager
+                                label.checkbox-inline
+                                    input#technician(name="role",type="checkbox",value="technician")
+                                    | Technician
+                        .bottom
+                            button.btn.btn-primary(type='submit') Register
+                            button.btn.btn-default(type='reset') Reset
