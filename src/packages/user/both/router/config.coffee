@@ -1,7 +1,7 @@
 Router.configure(
   onBeforeAction: ->
     if !Meteor.userId()
-      @render 'login'
+      Router.go 'login'
     else
       @next()
 )
