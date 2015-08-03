@@ -12,6 +12,9 @@ Package.describe({
 
 Package.onUse(function (api) {
     api.versionsFrom('1.1.0.2');
+    /* ---------- packages ----------- */
+
+    // both
     api.use([
         'ultimo:ultimo',
         'coffeescript',
@@ -19,15 +22,68 @@ Package.onUse(function (api) {
         'accounts-base',
         'accounts-password',
         'iron:router',
-        'less',
         'alpha:logger',
         'dburles:collection-helpers@1.0.3',
-        'matb33:collection-hooks@0.7.13'
+        'matb33:collection-hooks@0.7.13',
+        'reywood:publish-composite@1.3.6'
     ], ['client', 'server']);
-    api.use(['templating', 'mquandalle:jade']);
-    api.addFiles(['templates/users.jade', 'styles/styles.less'], 'client');
-    api.addFiles('scripts/seed/users.coffee', 'server');
-    api.addFiles('scripts/users.coffee');
+    // client
+    api.use([
+        'templating',
+        'mquandalle:jade',
+        'less'
+        ],
+        'client'
+    );
+
+    /* ----------- files ----------- */
+
+    // client
+    api.addFiles([
+            //styles
+        'client/styles/_add_user_button.less',
+        'client/styles/styles.less',
+            //templates
+        'client/templates/user/user.jade',
+        'client/templates/user/events.coffee',
+
+        'client/templates/userDetails/userDetails.jade',
+        'client/templates/userDetails/helpers.coffee',
+        'client/templates/userDetails/events.coffee',
+
+        'client/templates/globalHelpers.coffee',
+
+        'client/templates/all/all.jade',
+
+        'client/templates/admins/admins.jade',
+        'client/templates/admins/helpers.coffee',
+
+        'client/templates/addUser/addUser.jade',
+        'client/templates/addUser/events.coffee',
+        'client/templates/addUser/helpers.coffee',
+
+        'client/templates/managers/managers.jade',
+        'client/templates/managers/helpers.coffee',
+
+        'client/templates/technicians/technicians.jade',
+        'client/templates/technicians/helpers.coffee'
+        ],
+        'client');
+    // server
+    api.addFiles([
+        'lib/lib.coffee',
+        'private/default_users.coffee',
+        'server/methods/user.coffee',
+        'server/publications/roles.coffee',
+        'server/publications/users.coffee',
+        'server/seeds/admin.coffee'
+        ],
+        'server');
+    // both
+    api.addFiles([
+        'both/hooks/users.coffee',
+        'both/router/routes.coffee'
+    ],['client','server']);
 });
 
 Package.onTest(function (api) {
