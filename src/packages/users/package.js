@@ -49,6 +49,7 @@ Package.onUse(function (api) {
             //templates
         'client/templates/user/user.jade',
         'client/templates/user/events.coffee',
+        'client/templates/user/helpers.coffee',
 
         'client/templates/userDetails/userDetails.jade',
         'client/templates/userDetails/helpers.coffee',
