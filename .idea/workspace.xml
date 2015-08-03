@@ -2,79 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5397b42d-24aa-451c-a720-46e84a9c233f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/users/client/styles/_add_user_button.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/users/client/templates/addUser/addUser.jade" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/users/server/seeds/admin.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/users/client/templates/admins/admins.jade" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/users/client/templates/all/all.jade" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/techapp/client/templates/brand/brand.jade" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/techapp/both/router/config.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/user/both/router/config.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/techapp/both/router/controller.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/users/private/default_users.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/user/client/templates/login/events.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/user/client/templates/profile/events.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/user/client/templates/profileMini/events.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/users/client/templates/addUser/events.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/users/client/templates/user/events.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/users/client/templates/userDetails/events.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/techapp/client/templates/globalHelpers.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/users/client/templates/globalHelpers.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/techapp/client/templates/head/head.jade" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/techapp/client/templates/nav/helpers.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/user/client/templates/profile/helpers.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/user/client/templates/profileMini/helpers.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/users/client/templates/addUser/helpers.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/users/client/templates/admins/helpers.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/users/client/templates/managers/helpers.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/users/client/templates/technicians/helpers.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/users/client/templates/userDetails/helpers.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/techapp/client/templates/layout/layout.jade" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/users/lib/lib.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/techapp/client/templates/nav/link/link.jade" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/user/client/templates/login/login.jade" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/users/client/templates/managers/managers.jade" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/techapp/client/templates/nav/menu/menu.jade" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/techapp/client/templates/nav/nav.jade" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/technician/client/nav/navItems.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/user/client/templates/profile/profile.jade" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/user/client/templates/profileMini/profileMini.jade" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/users/server/publications/roles.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/techapp/both/router/routes.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/user/both/router/routes.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/users/both/router/routes.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/users/client/styles/styles.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/users/client/templates/technicians/technicians.jade" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/users/server/methods/user.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/users/client/templates/user/user.jade" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/users/client/templates/userDetails/userDetails.jade" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/users/tests/users-tests.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/users/both/hooks/users.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/users/server/publications/users.coffee" />
-      <change type="DELETED" beforePath="C:\Users\Alpha\Desktop\aep\technician manager\src\packages\techapp\scripts\techapp.coffee" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Alpha\Desktop\aep\technician manager\src\packages\techapp\templates\app.jade" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Alpha\Desktop\aep\technician manager\src\packages\technician\technician.coffee" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Alpha\Desktop\aep\technician manager\src\packages\user\scripts\user.coffee" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Alpha\Desktop\aep\technician manager\src\packages\user\templates\user.jade" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Alpha\Desktop\aep\technician manager\src\packages\users\scripts\seed\users.coffee" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Alpha\Desktop\aep\technician manager\src\packages\users\scripts\users.coffee" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Alpha\Desktop\aep\technician manager\src\packages\users\styles\styles.less" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Alpha\Desktop\aep\technician manager\src\packages\users\templates\users.jade" afterPath="" />
-      <change type="MOVED" beforePath="C:\Users\Alpha\Desktop\aep\technician manager\src\packages\techapp\styles\styles.less" afterPath="$PROJECT_DIR$/src/packages/techapp/client/styles/theme.less" />
-      <change type="MOVED" beforePath="C:\Users\Alpha\Desktop\aep\technician manager\src\packages\techapp\techapp-tests.js" afterPath="$PROJECT_DIR$/src/packages/techapp/tests/techapp-tests.js" />
-      <change type="MOVED" beforePath="C:\Users\Alpha\Desktop\aep\technician manager\src\packages\technician\technician-tests.js" afterPath="$PROJECT_DIR$/src/packages/technician/tests/technician-tests.js" />
-      <change type="MOVED" beforePath="C:\Users\Alpha\Desktop\aep\technician manager\src\packages\user\login-tests.js" afterPath="$PROJECT_DIR$/src/packages/user/tests/login-tests.js" />
-      <change type="MOVED" beforePath="C:\Users\Alpha\Desktop\aep\technician manager\src\packages\users\users-tests.js" afterPath="$PROJECT_DIR$/src/packages/users/tests/users-tests.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/packages/callouts/callouts.coffee" afterPath="$PROJECT_DIR$/src/packages/callouts/callouts.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/packages/callouts/package.js" afterPath="$PROJECT_DIR$/src/packages/callouts/package.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/packages/techapp/package.js" afterPath="$PROJECT_DIR$/src/packages/techapp/package.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/packages/technician/package.js" afterPath="$PROJECT_DIR$/src/packages/technician/package.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/packages/ultimo/package.js" afterPath="$PROJECT_DIR$/src/packages/ultimo/package.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/packages/user/package.js" afterPath="$PROJECT_DIR$/src/packages/user/package.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/packages/users/package.js" afterPath="$PROJECT_DIR$/src/packages/users/package.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/packages/schedule/schedule.coffee" afterPath="$PROJECT_DIR$/src/packages/schedule/schedule.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/packages/schedule/schedule.jade" afterPath="$PROJECT_DIR$/src/packages/schedule/schedule.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/.meteor/versions" afterPath="$PROJECT_DIR$/src/.meteor/versions" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="be758807-e921-4eb3-b15a-e0b93aa6de1b" name="New changelist" comment="added route and template for schedule" />
@@ -181,8 +108,8 @@
       <file leaf-file-name="roles.coffee" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/packages/users/server/publications/roles.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.078341015">
-              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.27419356">
+              <caret line="7" column="32" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -653,42 +580,6 @@
       <option name="number" value="Default" />
       <updated>1437685230624</updated>
     </task>
-    <task id="LOCAL-00025" summary="created basic code for client routes">
-      <created>1438237515783</created>
-      <option name="number" value="00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1438237515783</updated>
-    </task>
-    <task id="LOCAL-00026" summary="created nav property for techapp global var">
-      <created>1438237543818</created>
-      <option name="number" value="00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1438237543818</updated>
-    </task>
-    <task id="LOCAL-00027" summary="created code for user management&#10;">
-      <created>1438237608210</created>
-      <option name="number" value="00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1438237608210</updated>
-    </task>
-    <task id="LOCAL-00028" summary="created admin user management code&#10;">
-      <created>1438237629147</created>
-      <option name="number" value="00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1438237629147</updated>
-    </task>
-    <task id="LOCAL-00029" summary="removed default dashboard.js&#10;">
-      <created>1438237675168</created>
-      <option name="number" value="00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1438237675168</updated>
-    </task>
-    <task id="LOCAL-00030" summary="added client mgmt templates">
-      <created>1438238326847</created>
-      <option name="number" value="00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1438238326847</updated>
-    </task>
     <task id="LOCAL-00031" summary="added manager menu links">
       <created>1438238349456</created>
       <option name="number" value="00031" />
@@ -947,7 +838,43 @@
       <option name="project" value="LOCAL" />
       <updated>1438333537371</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="added some versions to some packages, not done yet tho">
+      <created>1438590700657</created>
+      <option name="number" value="00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1438590700658</updated>
+    </task>
+    <task id="LOCAL-00075" summary="added helpers to callouts, and used them in tabular">
+      <created>1438590749441</created>
+      <option name="number" value="00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1438590749442</updated>
+    </task>
+    <task id="LOCAL-00076" summary="added  version to aldeed tabular">
+      <created>1438590768963</created>
+      <option name="number" value="00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1438590768963</updated>
+    </task>
+    <task id="LOCAL-00077" summary="added helper to get user, fixed publish method">
+      <created>1438590983605</created>
+      <option name="number" value="00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1438590983605</updated>
+    </task>
+    <task id="LOCAL-00078" summary="added collection helpers">
+      <created>1438591003901</created>
+      <option name="number" value="00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1438591003901</updated>
+    </task>
+    <task id="LOCAL-00079" summary="removed sidechats js">
+      <created>1438591020850</created>
+      <option name="number" value="00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1438591020850</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TodoView">
@@ -964,15 +891,15 @@
     <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32991362" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28851175" sideWeight="0.55675673" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29438642" sideWeight="0.55675673" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.122570194" sideWeight="0.44324324" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25945947" sideWeight="0.4757764" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4085779" sideWeight="0.48751643" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32577905" sideWeight="0.7321101" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32577905" sideWeight="0.72710454" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1549676" sideWeight="0.4962162" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32577905" sideWeight="0.26788992" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32577905" sideWeight="0.27289546" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16036718" sideWeight="0.50378376" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1372973" sideWeight="0.4926045" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1019,11 +946,6 @@
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <confirmMoveToFailedCommit value="1" />
-    <MESSAGE value="seed users for admin, manager, and technician" />
-    <MESSAGE value="login page, profile mini at top right, and current user profile page" />
-    <MESSAGE value="added alanning roles" />
-    <MESSAGE value="added manager:callouts, moment, and datetimepicker" />
-    <MESSAGE value="added tabular table, routes and helpers for completeCallout" />
     <MESSAGE value="added tabular tables, and completeCallout template" />
     <MESSAGE value="created logger package" />
     <MESSAGE value="added a few words to dictionary" />
@@ -1039,12 +961,17 @@
     <MESSAGE value="removed empty line" />
     <MESSAGE value="added collection hooks" />
     <MESSAGE value="timestamped clients" />
-    <MESSAGE value="added collection helpers" />
     <MESSAGE value="timestamped users collection, added logging hooks" />
     <MESSAGE value="added logger, collectionhelpers, and collection hooks" />
     <MESSAGE value="removed timestampable" />
     <MESSAGE value="Merge branch '1.1' into development&#10;&#10;Conflicts:&#10;&#9;src/.meteor/packages&#10;&#9;src/.meteor/versions&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch '1.1' into development&#10;&#10;Conflicts:&#10;&#9;src/.meteor/packages&#10;&#9;src/.meteor/versions&#10;" />
+    <MESSAGE value="added some versions to some packages, not done yet tho" />
+    <MESSAGE value="added helpers to callouts, and used them in tabular" />
+    <MESSAGE value="added  version to aldeed tabular" />
+    <MESSAGE value="added helper to get user, fixed publish method" />
+    <MESSAGE value="added collection helpers" />
+    <MESSAGE value="removed sidechats js" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed sidechats js" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1305,7 +1232,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.078341015">
           <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1321,7 +1247,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.47004607">
           <caret line="12" column="46" selection-start-line="12" selection-start-column="46" selection-end-line="12" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1337,7 +1262,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="15" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1345,7 +1269,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.47004607">
           <caret line="12" column="95" selection-start-line="12" selection-start-column="95" selection-end-line="12" selection-end-column="95" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1413,6 +1336,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/packages/users/server/publications/users.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/packages/users/both/router/routes.coffee">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1421,18 +1351,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/packages/users/server/publications/users.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/packages/users/server/publications/roles.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.078341015">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.27419356">
+          <caret line="7" column="32" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
           <folding />
         </state>
       </provider>
