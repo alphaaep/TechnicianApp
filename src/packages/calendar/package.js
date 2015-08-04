@@ -1,5 +1,5 @@
 Package.describe({
-    name: 'manager:callouts',
+    name: 'technician:calendar',
     version: '0.0.1',
     // Brief, one-line summary of the package.
     summary: '',
@@ -12,32 +12,25 @@ Package.describe({
 
 Package.onUse(function (api) {
     api.versionsFrom('1.1.0.2');
+
     api.use([
-        'alpha:logger',
-        'techapp:core',
         'mquandalle:jade',
         'coffeescript',
         'templating',
-        'mongo',
         'iron:router',
-        'aldeed:tabular@1.2.0',
-        'alanning:roles',
-        'mizzao:jquery-ui',
-        'momentjs:moment',
-        'tsega:bootstrap3-datetimepicker@4.14.30_4',
-        'dburles:collection-helpers@1.0.3',
-        'matb33:collection-hooks@0.7.13',
-        'cunneen:signature-pad@1.0.0'
+        'gabrielhpugliese:supercalendar@0.7.1'
+    ]);
+
+    api.addFiles([
+        'calendar.jade'
     ]);
     api.addFiles([
-        'callouts.jade'
-        ],
-            'client');
-    api.addFiles(['callouts.coffee']);
+        'calendar.coffee'
+    ]);
 });
 
 Package.onTest(function (api) {
     api.use('tinytest');
-    api.use('manager:callouts');
-    api.addFiles('callouts-tests.js');
+    api.use('technician:calendar');
+    api.addFiles('calendar-tests.js');
 });

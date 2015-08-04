@@ -1,0 +1,1146 @@
+Index: src/packages/users/both/hooks/users.coffee
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>windows-1252
+===================================================================
+--- src/packages/users/both/hooks/users.coffee	(date 1438595066000)
++++ src/packages/users/both/hooks/users.coffee	(revision )
+@@ -1,6 +1,6 @@
+-Meteor.users.before.insert (userId, doc) ->
++Meteor.users.after.insert (userId, doc) ->
+   Logger.logInsert doc, 'users'
+-Meteor.users.before.update (userId, doc, fieldName, modifier) ->
+-  Logger.logUpdate doc, modifier, 'users'
+-Meteor.users.before.remove (userId, doc) ->
++Meteor.users.after.update (userId, doc) ->
++  Logger.logUpdate this.previous, doc, 'users'
++Meteor.users.after.remove (userId, doc) ->
+   Logger.logRemove doc, 'users'
+\ No newline at end of file
+Index: src/packages/users/client/templates/admins/helpers.coffee
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>windows-1252
+===================================================================
+--- src/packages/users/client/templates/admins/helpers.coffee	(date 1438595066000)
++++ src/packages/users/client/templates/admins/helpers.coffee	(revision )
+@@ -1,3 +1,1 @@
+-Template.admins.helpers
+-  admins: ->
+-    Roles.getUsersInRole 'admin'
+\ No newline at end of file
+Index: src/packages/users/package.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>windows-1252
+===================================================================
+--- src/packages/users/package.js	(date 1438595066000)
++++ src/packages/users/package.js	(revision )
+@@ -62,17 +62,17 @@
+         'client/templates/all/all.jade',
+ 
+         'client/templates/admins/admins.jade',
+-        'client/templates/admins/helpers.coffee',
++        //'client/templates/admins/helpers.coffee',
+ 
+         'client/templates/addUser/addUser.jade',
+         'client/templates/addUser/events.coffee',
+         'client/templates/addUser/helpers.coffee',
+ 
+         'client/templates/managers/managers.jade',
+-        'client/templates/managers/helpers.coffee',
++        //'client/templates/managers/helpers.coffee',
+ 
+         'client/templates/technicians/technicians.jade',
+-        'client/templates/technicians/helpers.coffee'
++        //'client/templates/technicians/helpers.coffee'
+         ],
+         'client');
+     // server
+Index: src/packages/users/client/templates/technicians/helpers.coffee
+===================================================================
+--- src/packages/users/client/templates/technicians/helpers.coffee	(date 1438595066000)
++++ src/packages/users/client/templates/technicians/helpers.coffee	(date 1438595066000)
+@@ -1,3 +0,0 @@
+-Template.technicians.helpers
+-  technicians: ->
+-    Roles.getUsersInRole 'technician'
+\ No newline at end of file
+Index: src/packages/users/server/publications/roles.coffee
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>windows-1252
+===================================================================
+--- src/packages/users/server/publications/roles.coffee	(date 1438595066000)
++++ src/packages/users/server/publications/roles.coffee	(revision )
+@@ -1,8 +1,5 @@
+-Meteor.publish 'admins', ->
+-  Roles.getUsersInRole 'admins'
++Meteor.publish 'admins', -> Roles.getUsersInRole 'admin'
+ 
+-Meteor.publish 'technicians', ->
+-  Roles.getUsersInRole 'technician'
++Meteor.publish 'technicians', -> Roles.getUsersInRole 'technician'
+ 
+-Meteor.publish 'managers', ->
+-  Roles.getUsersInRole 'manager'
+\ No newline at end of file
++Meteor.publish 'managers', -> Roles.getUsersInRole 'manager'
+\ No newline at end of file
+Index: src/packages/users/both/router/routes.coffee
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>windows-1252
+===================================================================
+--- src/packages/users/both/router/routes.coffee	(date 1438595066000)
++++ src/packages/users/both/router/routes.coffee	(revision )
+@@ -3,7 +3,7 @@
+   subscriptions: ->
+     @subscribe 'admins'
+   waitOn: -> Meteor.subscribe 'admins'
+-  data:
++  data: ->
+     admins: -> Roles.getUsersInRole 'admin'
+ }
+ 
+@@ -12,7 +12,8 @@
+   subscriptions: ->
+     @subscribe 'managers'
+   waitOn: -> Meteor.subscribe 'managers'
+-  data: -> Roles.getUsersInRole 'admin'
++  data: ->
++    managers: -> Roles.getUsersInRole 'manager'
+ }
+ 
+ Router.route 'technicians', {
+@@ -20,7 +21,8 @@
+   subscriptions: ->
+     @subscribe 'technicians'
+   waitOn: -> Meteor.subscribe 'technicians'
+-  data: -> Roles.getUsersInRole 'technician'
++  data: ->
++    technicians: -> Roles.getUsersInRole 'technician'
+ }
+ 
+ Router.route 'all', {
+\ No newline at end of file
+Index: src/packages/users/client/templates/managers/helpers.coffee
+===================================================================
+--- src/packages/users/client/templates/managers/helpers.coffee	(date 1438595066000)
++++ src/packages/users/client/templates/managers/helpers.coffee	(date 1438595066000)
+@@ -1,3 +0,0 @@
+-Template.managers.helpers
+-  managers: ->
+-    Roles.getUsersInRole 'manager'
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/workspace.xml	(date 1438595066000)
++++ .idea/workspace.xml	(revision )
+@@ -2,13 +2,17 @@
+ <project version="4">
+   <component name="ChangeListManager">
+     <list default="true" id="5397b42d-24aa-451c-a720-46e84a9c233f" name="Default" comment="">
+-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/user/client/templates/profile/activity/activity.jade" />
+-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/user/client/templates/profile/activity/helpers.coffee" />
+-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/packages/user/client/templates/profile/helpers.coffee" afterPath="$PROJECT_DIR$/src/packages/user/client/templates/profile/helpers.coffee" />
+-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/packages/user/package.js" afterPath="$PROJECT_DIR$/src/packages/user/package.js" />
++      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/calendar/calendar.coffee" />
++      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/packages/calendar/calendar.jade" />
++      <change type="DELETED" beforePath="C:\Users\Alpha\Desktop\aep\technician manager\src\packages\users\client\templates\managers\helpers.coffee" afterPath="" />
++      <change type="DELETED" beforePath="C:\Users\Alpha\Desktop\aep\technician manager\src\packages\users\client\templates\technicians\helpers.coffee" afterPath="" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/packages/users/client/templates/admins/admins.jade" afterPath="$PROJECT_DIR$/src/packages/users/client/templates/admins/admins.jade" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/packages/callouts/callouts.coffee" afterPath="$PROJECT_DIR$/src/packages/callouts/callouts.coffee" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/packages/users/client/templates/admins/helpers.coffee" afterPath="$PROJECT_DIR$/src/packages/users/client/templates/admins/helpers.coffee" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/packages/users/package.js" afterPath="$PROJECT_DIR$/src/packages/users/package.js" />
+-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/packages/user/client/templates/profile/profile.jade" afterPath="$PROJECT_DIR$/src/packages/user/client/templates/profile/profile.jade" />
+-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/packages/users/client/templates/userDetails/userDetails.jade" afterPath="$PROJECT_DIR$/src/packages/users/client/templates/userDetails/userDetails.jade" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/packages/users/server/publications/roles.coffee" afterPath="$PROJECT_DIR$/src/packages/users/server/publications/roles.coffee" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/packages/users/both/router/routes.coffee" afterPath="$PROJECT_DIR$/src/packages/users/both/router/routes.coffee" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/packages/users/both/hooks/users.coffee" afterPath="$PROJECT_DIR$/src/packages/users/both/hooks/users.coffee" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+     </list>
+     <list id="be758807-e921-4eb3-b15a-e0b93aa6de1b" name="New changelist" comment="added route and template for schedule" />
+@@ -33,18 +37,7 @@
+     </favorites_list>
+   </component>
+   <component name="FileEditorManager">
+-    <leaf>
+-      <file leaf-file-name="package.js" pinned="false" current-in-tab="true">
+-        <entry file="file://$PROJECT_DIR$/src/packages/user/package.js">
+-          <provider selected="true" editor-type-id="text-editor">
+-            <state vertical-scroll-proportion="0.81693363">
+-              <caret line="34" column="47" selection-start-line="34" selection-start-column="47" selection-end-line="34" selection-end-column="47" />
+-              <folding />
+-            </state>
+-          </provider>
+-        </entry>
+-      </file>
+-    </leaf>
++    <leaf />
+   </component>
+   <component name="FileTemplateManagerImpl">
+     <option name="RECENT_TEMPLATES">
+@@ -54,8 +47,8 @@
+         <option value="CoffeeScript Class" />
+         <option value="package_json" />
+         <option value="Less File" />
+-        <option value="Jade File" />
+         <option value="CoffeeScript File" />
++        <option value="Jade File" />
+       </list>
+     </option>
+   </component>
+@@ -70,13 +63,6 @@
+   <component name="IdeDocumentHistory">
+     <option name="CHANGED_PATHS">
+       <list>
+-        <option value="$PROJECT_DIR$/src/packages/techapp/client/templates/brand/brand.jade" />
+-        <option value="$PROJECT_DIR$/src/packages/techapp/client/templates/layout/layout.jade" />
+-        <option value="$PROJECT_DIR$/src/packages/techapp/client/templates/nav/menu/menu.jade" />
+-        <option value="$PROJECT_DIR$/src/packages/techapp/client/templates/nav/link/link.jade" />
+-        <option value="$PROJECT_DIR$/src/packages/techapp/templates/app.jade" />
+-        <option value="$PROJECT_DIR$/src/packages/techapp/client/templates/nav/helpers.coffee" />
+-        <option value="$PROJECT_DIR$/src/packages/techapp/both/router/routers.coffee" />
+         <option value="$PROJECT_DIR$/src/packages/techapp/both/router/configg.coffee" />
+         <option value="$PROJECT_DIR$/src/packages/techapp/both/router/routes.coffee" />
+         <option value="$PROJECT_DIR$/src/packages/techapp/both/router/config.coffee" />
+@@ -101,26 +87,33 @@
+         <option value="$PROJECT_DIR$/src/packages/callouts/package.js" />
+         <option value="$PROJECT_DIR$/src/packages/schedule/package.js" />
+         <option value="$PROJECT_DIR$/src/packages/schedule/schedule.jade" />
+-        <option value="$PROJECT_DIR$/src/packages/users/client/templates/admins/admins.jade" />
+-        <option value="$PROJECT_DIR$/src/packages/users/server/publications/roles.coffee" />
+         <option value="$PROJECT_DIR$/src/packages/techapp/client/templates/nav/nav.jade" />
+         <option value="$PROJECT_DIR$/src/packages/techapp/client/templates/globalHelpers.coffee" />
+         <option value="$PROJECT_DIR$/src/packages/admin/scripts/admin.coffee" />
+-        <option value="$PROJECT_DIR$/src/packages/users/both/router/routes.coffee" />
+         <option value="$PROJECT_DIR$/src/packages/ultimo/package.js" />
+         <option value="$PROJECT_DIR$/src/packages/ultimo/css/styles.less" />
+         <option value="$PROJECT_DIR$/src/packages/users/client/templates/user/events.coffee" />
+         <option value="$PROJECT_DIR$/src/packages/users/client/templates/user/user.jade" />
+         <option value="$PROJECT_DIR$/src/packages/users/client/templates/user/helpers.coffee" />
+-        <option value="$PROJECT_DIR$/src/packages/callouts/callouts.coffee" />
+         <option value="$PROJECT_DIR$/src/packages/schedule/schedule.coffee" />
+         <option value="$PROJECT_DIR$/src/packages/user/client/templates/profile/helpers.coffee" />
+         <option value="$PROJECT_DIR$/src/packages/user/client/templates/profile/activity/activity.jade" />
+         <option value="$PROJECT_DIR$/src/packages/users/client/templates/userDetails/userDetails.jade" />
+         <option value="$PROJECT_DIR$/src/packages/user/client/templates/profile/activity/helpers.coffee" />
+-        <option value="$PROJECT_DIR$/src/packages/users/package.js" />
+         <option value="$PROJECT_DIR$/src/packages/user/client/templates/profile/profile.jade" />
+         <option value="$PROJECT_DIR$/src/packages/user/package.js" />
++        <option value="$PROJECT_DIR$/src/packages/technician/package.js" />
++        <option value="$PROJECT_DIR$/src/packages/calendar/calendar.coffee" />
++        <option value="$PROJECT_DIR$/src/packages/calendar/package.js" />
++        <option value="$PROJECT_DIR$/src/packages/callouts/callouts.coffee" />
++        <option value="$PROJECT_DIR$/src/packages/users/both/hooks/users.coffee" />
++        <option value="$PROJECT_DIR$/src/packages/users/client/templates/admins/helpers.coffee" />
++        <option value="$PROJECT_DIR$/src/packages/users/client/templates/admins/admins.jade" />
++        <option value="$PROJECT_DIR$/src/packages/users/client/templates/managers/helpers.coffee" />
++        <option value="$PROJECT_DIR$/src/packages/users/client/templates/technicians/helpers.coffee" />
++        <option value="$PROJECT_DIR$/src/packages/users/both/router/routes.coffee" />
++        <option value="$PROJECT_DIR$/src/packages/users/package.js" />
++        <option value="$PROJECT_DIR$/src/packages/users/server/publications/roles.coffee" />
+       </list>
+     </option>
+   </component>
+@@ -185,10 +178,6 @@
+               <option name="myItemId" value="packages" />
+               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+             </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="users" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+           </PATH>
+           <PATH>
+             <PATH_ELEMENT>
+@@ -203,22 +192,6 @@
+               <option name="myItemId" value="src" />
+               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+             </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="packages" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="users" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="client" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="templates" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+           </PATH>
+           <PATH>
+             <PATH_ELEMENT>
+@@ -229,261 +202,7 @@
+               <option name="myItemId" value="technician manager" />
+               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+             </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="src" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="packages" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="users" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="client" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="templates" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="userDetails" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+           </PATH>
+-          <PATH>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="technician manager" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="technician manager" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="src" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="packages" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="users" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="client" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="templates" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="userDetails" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="activity" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-          </PATH>
+-          <PATH>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="technician manager" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="technician manager" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="src" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="packages" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="users" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="client" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-          </PATH>
+-          <PATH>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="technician manager" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="technician manager" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="src" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="packages" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="user" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-          </PATH>
+-          <PATH>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="technician manager" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="technician manager" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="src" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="packages" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="user" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="client" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="templates" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-          </PATH>
+-          <PATH>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="technician manager" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="technician manager" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="src" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="packages" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="user" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="client" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="templates" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="profile" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-          </PATH>
+-          <PATH>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="technician manager" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="technician manager" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="src" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="packages" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="user" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="client" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="templates" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="profile" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="activity" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-          </PATH>
+-          <PATH>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="technician manager" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="technician manager" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="src" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="packages" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-          </PATH>
+-          <PATH>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="technician manager" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="technician manager" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="src" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-          </PATH>
+-          <PATH>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="technician manager" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+-            </PATH_ELEMENT>
+-            <PATH_ELEMENT>
+-              <option name="myItemId" value="technician manager" />
+-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+-            </PATH_ELEMENT>
+-          </PATH>
+         </subPane>
+       </pane>
+       <pane id="Scratches">
+@@ -675,6 +394,22 @@
+     <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+     <property name="recentsLimit" value="5" />
+     <property name="restartRequiresConfirmation" value="true" />
++    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="37" />
++    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
++    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="51" />
++    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
++    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="51" />
++    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
++    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="419" />
++    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
++    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="33" />
++    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
++    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="51" />
++    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
++    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="51" />
++    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
++    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="423" />
++    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+   </component>
+   <component name="RecentsManager">
+     <key name="CopyFile.RECENT_KEYS">
+@@ -1081,22 +816,22 @@
+   </component>
+   <component name="ToolWindowManager">
+     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+-    <editor active="true" />
++    <editor active="false" />
+     <layout>
++      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32963446" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
++      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18929504" sideWeight="0.55675673" order="0" side_tool="false" content_ui="combo" />
+       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.122570194" sideWeight="0.44324324" order="6" side_tool="true" content_ui="tabs" />
+-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25945947" sideWeight="0.4757764" order="9" side_tool="false" content_ui="tabs" />
+       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
+       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4085779" sideWeight="0.48751643" order="8" side_tool="false" content_ui="tabs" />
+-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32577905" sideWeight="0.70028543" order="2" side_tool="false" content_ui="tabs" />
+-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32152975" sideWeight="0.57469076" order="10" side_tool="true" content_ui="tabs" />
+-      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32991362" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31396866" sideWeight="0.55675673" order="0" side_tool="false" content_ui="combo" />
+-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32294616" sideWeight="0.42530924" order="1" side_tool="false" content_ui="tabs" />
++      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32152975" sideWeight="0.4162641" order="1" side_tool="false" content_ui="tabs" />
++      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.407932" sideWeight="0.48470208" order="8" side_tool="false" content_ui="tabs" />
++      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32577905" sideWeight="0.636876" order="2" side_tool="false" content_ui="tabs" />
+       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1549676" sideWeight="0.4962162" order="1" side_tool="false" content_ui="tabs" />
++      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.407932" sideWeight="0.5152979" order="10" side_tool="true" content_ui="tabs" />
+       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16036718" sideWeight="0.50378376" order="2" side_tool="true" content_ui="tabs" />
+       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1372973" sideWeight="0.4926045" order="3" side_tool="false" content_ui="tabs" />
+       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
++      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25945947" sideWeight="0.4757764" order="9" side_tool="false" content_ui="tabs" />
+       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+@@ -1173,367 +908,386 @@
+     <watches-manager />
+   </component>
+   <component name="editorHistoryManager">
+-    <entry file="file://$PROJECT_DIR$/src/packages/technician/package.js">
++    <entry file="file://$PROJECT_DIR$/src/packages/techapp/both/router/config.coffee">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.49186257">
+-          <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
++        <state vertical-scroll-proportion="0.0">
++          <caret line="2" column="26" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/technician/client/nav/navItems.coffee">
++    <entry file="file://$PROJECT_DIR$/src/packages/techapp/both/router/controller.coffee">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.0">
+-          <caret line="0" column="11" selection-start-line="0" selection-start-column="11" selection-end-line="0" selection-end-column="11" />
++        <state vertical-scroll-proportion="0.18312387">
++          <caret line="6" column="3" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/technician/tests/technician-tests.js">
++    <entry file="file://$PROJECT_DIR$/src/packages/techapp/client/templates/nav/helpers.coffee">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.12296564">
+-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
++        <state vertical-scroll-proportion="0.06148282">
++          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/technician/README.md">
+-      <provider editor-type-id="MarkdownPreviewEditor">
+-        <state />
+-      </provider>
++    <entry file="file://$PROJECT_DIR$/src/packages/techapp/package.js">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.0">
+-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
++        <state vertical-scroll-proportion="0.12296564">
++          <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/techapp/client/templates/head/head.jade">
++    <entry file="file://$PROJECT_DIR$/src/packages/clients/package.js">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.03074141">
+-          <caret line="1" column="30" selection-start-line="1" selection-start-column="30" selection-end-line="1" selection-end-column="30" />
++        <state vertical-scroll-proportion="-0.0144665465">
++          <caret line="10" column="3" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/techapp/client/templates/brand/brand.jade">
++    <entry file="file://$PROJECT_DIR$/src/packages/clients/scripts/clients.coffee">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.0">
+-          <caret line="6" column="77" selection-start-line="6" selection-start-column="77" selection-end-line="6" selection-end-column="77" />
++        <state vertical-scroll-proportion="0.078341015">
++          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/techapp/client/templates/layout/layout.jade">
++    <entry file="file://$PROJECT_DIR$/src/packages/callouts/package.js">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.24593128">
+-          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
++        <state vertical-scroll-proportion="0.86175114">
++          <caret line="22" column="29" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/techapp/tests/techapp-tests.js">
++    <entry file="file://$PROJECT_DIR$/src/packages/callouts/callouts.jade">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.12296564">
+-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
++        <state vertical-scroll-proportion="0.47004607">
++          <caret line="12" column="46" selection-start-line="12" selection-start-column="46" selection-end-line="12" selection-end-column="46" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/techapp/client/styles/theme.less">
++    <entry file="file://$PROJECT_DIR$/src/packages/techapp/client/templates/globalHelpers.coffee">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.06403013">
+-          <caret line="2" column="1" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
++        <state vertical-scroll-proportion="0.0">
++          <caret line="3" column="31" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/techapp/both/router/routes.coffee">
++    <entry file="file://$PROJECT_DIR$/src/packages/techapp/client/templates/nav/nav.jade">
+       <provider selected="true" editor-type-id="text-editor">
+         <state vertical-scroll-proportion="0.0">
+-          <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
++          <caret line="0" column="8" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/techapp/both/router/config.coffee">
++    <entry file="file://$PROJECT_DIR$/src/packages/ultimo/package.js">
+       <provider selected="true" editor-type-id="text-editor">
+         <state vertical-scroll-proportion="0.0">
+-          <caret line="2" column="26" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
++          <caret line="14" column="106" selection-start-line="14" selection-start-column="106" selection-end-line="14" selection-end-column="106" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/techapp/both/router/controller.coffee">
++    <entry file="file://$PROJECT_DIR$/src/packages/ultimo/css/styles.less">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.18312387">
+-          <caret line="6" column="3" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
++        <state vertical-scroll-proportion="0.083333336">
++          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/techapp/client/templates/nav/helpers.coffee">
++    <entry file="file://$PROJECT_DIR$/src/packages/users/client/templates/all/all.jade">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.06148282">
+-          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
++        <state vertical-scroll-proportion="0.35253456">
++          <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/techapp/package.js">
++    <entry file="file://$PROJECT_DIR$/src/packages/admin/scripts/admin.coffee">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.12296564">
+-          <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
++        <state vertical-scroll-proportion="0.6267281">
++          <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/clients/package.js">
++    <entry file="file://$PROJECT_DIR$/src/packages/techapp/client/templates/nav/link/link.jade">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="-0.0144665465">
+-          <caret line="10" column="3" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
++        <state vertical-scroll-proportion="0.15668203">
++          <caret line="4" column="46" selection-start-line="4" selection-start-column="46" selection-end-line="4" selection-end-column="46" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/clients/scripts/clients.coffee">
++    <entry file="file://$PROJECT_DIR$/src/packages/techapp/client/templates/nav/menu/menu.jade">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.078341015">
+-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
++        <state vertical-scroll-proportion="0.39170507">
++          <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/callouts/package.js">
++    <entry file="file://$PROJECT_DIR$/src/packages/users/client/templates/user/events.coffee">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.86175114">
+-          <caret line="22" column="29" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
++        <state vertical-scroll-proportion="0.11751152">
++          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/callouts/callouts.jade">
++    <entry file="file://$PROJECT_DIR$/src/packages/users/client/templates/user/user.jade">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.47004607">
+-          <caret line="12" column="46" selection-start-line="12" selection-start-column="46" selection-end-line="12" selection-end-column="46" />
++        <state vertical-scroll-proportion="0.5483871">
++          <caret line="14" column="36" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/users/server/publications/users.coffee">
++    <entry file="file://$PROJECT_DIR$/src/packages/schedule/package.js">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.0">
+-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
++        <state vertical-scroll-proportion="0.039170507">
++          <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/users/server/publications/roles.coffee">
++    <entry file="file://$PROJECT_DIR$/src/packages/users/client/templates/userDetails/helpers.coffee">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.23502304">
+-          <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
++        <state vertical-scroll-proportion="0.35253456">
++          <caret line="9" column="2" selection-start-line="9" selection-start-column="2" selection-end-line="10" selection-end-column="46" />
++          <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/users/client/templates/admins/admins.jade">
++    <entry file="file://$PROJECT_DIR$/src/packages/users/client/templates/userDetails/activity/helpers.coffee">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.47004607">
+-          <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
++        <state vertical-scroll-proportion="0.039170507">
++          <caret line="1" column="17" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
++          <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/users/client/templates/admins/helpers.coffee">
++    <entry file="file://$PROJECT_DIR$/src/packages/users/client/templates/userDetails/activity/activity.jade">
+       <provider selected="true" editor-type-id="text-editor">
+         <state vertical-scroll-proportion="0.078341015">
+-          <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
++          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/schedule/schedule.jade">
++    <entry file="file://$PROJECT_DIR$/src/packages/user/client/templates/profile/helpers.coffee">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.0">
+-          <caret line="17" column="74" selection-start-line="17" selection-start-column="74" selection-end-line="17" selection-end-column="74" />
++        <state vertical-scroll-proportion="0.27419356">
++          <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
++          <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/techapp/client/templates/globalHelpers.coffee">
++    <entry file="file://$PROJECT_DIR$/src/packages/users/client/templates/userDetails/userDetails.jade">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.0">
+-          <caret line="3" column="31" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
++        <state vertical-scroll-proportion="0.686636">
++          <caret line="81" column="60" selection-start-line="81" selection-start-column="60" selection-end-line="81" selection-end-column="60" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/techapp/client/templates/nav/nav.jade">
++    <entry file="file://$PROJECT_DIR$/src/packages/user/client/templates/profile/events.coffee">
+       <provider selected="true" editor-type-id="text-editor">
+         <state vertical-scroll-proportion="0.0">
+-          <caret line="0" column="8" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
++          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/users/both/router/routes.coffee">
++    <entry file="file://$PROJECT_DIR$/src/packages/user/client/templates/profile/activity/activity.jade">
+       <provider selected="true" editor-type-id="text-editor">
+         <state vertical-scroll-proportion="0.0">
+-          <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
++          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/ultimo/package.js">
++    <entry file="file://$PROJECT_DIR$/src/packages/user/client/templates/profile/profile.jade">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.0">
+-          <caret line="14" column="106" selection-start-line="14" selection-start-column="106" selection-end-line="14" selection-end-column="106" />
++        <state vertical-scroll-proportion="0.7665904">
++          <caret line="85" column="42" selection-start-line="85" selection-start-column="42" selection-end-line="85" selection-end-column="42" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/ultimo/css/styles.less">
++    <entry file="file://$PROJECT_DIR$/src/packages/user/client/templates/profile/activity/helpers.coffee">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.083333336">
+-          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
++        <state vertical-scroll-proportion="0.23340961">
++          <caret line="6" column="47" selection-start-line="6" selection-start-column="47" selection-end-line="6" selection-end-column="47" />
++          <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/users/client/templates/all/all.jade">
++    <entry file="file://$PROJECT_DIR$/src/packages/user/package.js">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.35253456">
+-          <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
++        <state vertical-scroll-proportion="0.18306637">
++          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
++          <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/admin/scripts/admin.coffee">
++    <entry file="file://$PROJECT_DIR$/src/packages/schedule/schedule.coffee">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.6267281">
+-          <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
++        <state vertical-scroll-proportion="0.11670481">
++          <caret line="36" column="21" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
++          <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/techapp/client/templates/nav/link/link.jade">
++    <entry file="file://$PROJECT_DIR$/src/packages/schedule/schedule.jade">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.15668203">
+-          <caret line="4" column="46" selection-start-line="4" selection-start-column="46" selection-end-line="4" selection-end-column="46" />
++        <state vertical-scroll-proportion="0.66132724">
++          <caret line="17" column="74" selection-start-line="17" selection-start-column="74" selection-end-line="17" selection-end-column="74" />
++          <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/techapp/client/templates/nav/menu/menu.jade">
++    <entry file="file://$PROJECT_DIR$/src/packages/technician/package.js">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.39170507">
+-          <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
++        <state vertical-scroll-proportion="0.7281106">
++          <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
++          <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/users/client/templates/globalHelpers.coffee">
++    <entry file="file://$PROJECT_DIR$/src/packages/calendar/calendar.coffee">
+       <provider selected="true" editor-type-id="text-editor">
+         <state vertical-scroll-proportion="0.0">
+           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
++          <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/users/client/templates/user/helpers.coffee">
++    <entry file="file://$PROJECT_DIR$/src/packages/users/private/default_users.coffee">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.039170507">
+-          <caret line="1" column="11" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
++        <state vertical-scroll-proportion="0.19585253">
++          <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
++          <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/users/client/templates/user/events.coffee">
++    <entry file="file://$PROJECT_DIR$/src/packages/users/server/seeds/admin.coffee">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.11751152">
+-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
++        <state vertical-scroll-proportion="0.078341015">
++          <caret line="2" column="40" selection-start-line="2" selection-start-column="33" selection-end-line="2" selection-end-column="40" />
++          <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/users/client/templates/user/user.jade">
++    <entry file="file://$PROJECT_DIR$/src/packages/calendar/calendar.jade">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.5483871">
+-          <caret line="14" column="36" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
++        <state vertical-scroll-proportion="0.0">
++          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
++          <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/schedule/package.js">
++    <entry file="file://$PROJECT_DIR$/src/packages/callouts/callouts.coffee">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.039170507">
+-          <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
++        <state vertical-scroll-proportion="0.4516129">
++          <caret line="158" column="19" selection-start-line="158" selection-start-column="19" selection-end-line="158" selection-end-column="19" />
++          <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/schedule/schedule.coffee">
++    <entry file="file://$PROJECT_DIR$/src/packages/calendar/package.js">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.43087557">
+-          <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
++        <state vertical-scroll-proportion="-6.219512">
++          <caret line="15" column="46" selection-start-line="15" selection-start-column="46" selection-end-line="15" selection-end-column="46" />
++          <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/callouts/callouts.coffee">
++    <entry file="file://$PROJECT_DIR$/src/packages/users/both/hooks/users.coffee">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.19585253">
+-          <caret line="29" column="6" selection-start-line="29" selection-start-column="6" selection-end-line="33" selection-end-column="19" />
++        <state vertical-scroll-proportion="0.15668203">
++          <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+           <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/users/client/templates/userDetails/helpers.coffee">
++    <entry file="file://$PROJECT_DIR$/src/packages/users/lib/lib.coffee">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.35253456">
+-          <caret line="9" column="2" selection-start-line="9" selection-start-column="2" selection-end-line="10" selection-end-column="46" />
++        <state vertical-scroll-proportion="0.0">
++          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+           <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/users/client/templates/userDetails/activity/helpers.coffee">
++    <entry file="file://$PROJECT_DIR$/src/packages/users/server/methods/user.coffee">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.039170507">
+-          <caret line="1" column="17" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
++        <state vertical-scroll-proportion="0.0">
++          <caret line="6" column="33" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
+           <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/users/client/templates/userDetails/activity/activity.jade">
++    <entry file="file://$PROJECT_DIR$/src/packages/users/client/templates/admins/helpers.coffee">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.078341015">
+-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
++        <state vertical-scroll-proportion="0.0">
++          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+           <folding />
+         </state>
+       </provider>
+     </entry>
+     <entry file="file://$PROJECT_DIR$/src/packages/users/package.js">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.78341013">
+-          <caret line="29" column="29" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
++        <state vertical-scroll-proportion="1.8177711">
++          <caret line="71" column="53" selection-start-line="71" selection-start-column="53" selection-end-line="71" selection-end-column="53" />
+           <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/user/client/templates/profile/helpers.coffee">
++    <entry file="file://$PROJECT_DIR$/src/packages/users/client/templates/managers/managers.jade">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.27419356">
+-          <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
++        <state vertical-scroll-proportion="0.33283132">
++          <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+           <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/users/client/templates/userDetails/userDetails.jade">
++    <entry file="file://$PROJECT_DIR$/src/packages/users/client/templates/technicians/technicians.jade">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.686636">
+-          <caret line="81" column="60" selection-start-line="81" selection-start-column="60" selection-end-line="81" selection-end-column="60" />
++        <state vertical-scroll-proportion="0.30722892">
++          <caret line="12" column="38" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="38" />
+           <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/user/client/templates/profile/events.coffee">
++    <entry file="file://$PROJECT_DIR$/src/packages/users/client/templates/user/helpers.coffee">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.0">
+-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
++        <state vertical-scroll-proportion="0.05120482">
++          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="22" />
+           <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/user/client/templates/profile/activity/activity.jade">
++    <entry file="file://$PROJECT_DIR$/src/packages/users/server/publications/users.coffee">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.0">
+-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
++        <state vertical-scroll-proportion="0.07680723">
++          <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
+           <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/user/client/templates/profile/profile.jade">
++    <entry file="file://$PROJECT_DIR$/src/packages/users/both/router/routes.coffee">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.7665904">
+-          <caret line="85" column="42" selection-start-line="85" selection-start-column="42" selection-end-line="85" selection-end-column="42" />
++        <state vertical-scroll-proportion="0.58885545">
++          <caret line="23" column="10" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="10" />
+           <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/user/client/templates/profile/activity/helpers.coffee">
++    <entry file="file://$PROJECT_DIR$/src/packages/users/client/templates/admins/admins.jade">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.23340961">
+-          <caret line="6" column="47" selection-start-line="6" selection-start-column="47" selection-end-line="6" selection-end-column="47" />
++        <state vertical-scroll-proportion="0.33283132">
++          <caret line="13" column="25" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
+           <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/packages/user/package.js">
++    <entry file="file://$PROJECT_DIR$/src/packages/users/server/publications/roles.coffee">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state vertical-scroll-proportion="0.81693363">
+-          <caret line="34" column="47" selection-start-line="34" selection-start-column="47" selection-end-line="34" selection-end-column="47" />
++        <state vertical-scroll-proportion="0.10240964">
++          <caret line="4" column="60" selection-start-line="4" selection-start-column="60" selection-end-line="4" selection-end-column="60" />
++          <folding />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/packages/users/client/templates/globalHelpers.coffee">
++      <provider selected="true" editor-type-id="text-editor">
++        <state vertical-scroll-proportion="0.07680723">
++          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+           <folding />
+         </state>
+       </provider>
+\ No newline at end of file
+Index: src/packages/users/client/templates/admins/admins.jade
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>windows-1252
+===================================================================
+--- src/packages/users/client/templates/admins/admins.jade	(date 1438595066000)
++++ src/packages/users/client/templates/admins/admins.jade	(revision )
+@@ -10,5 +10,5 @@
+     .container.clear_both.padding_fix
+         .page-content
+             .row
+-                +each admins
++                +each getUsers 'admin'
+                     +user

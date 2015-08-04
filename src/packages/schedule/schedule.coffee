@@ -24,7 +24,9 @@ Tables.CalloutsNotDone = new Tabular.Table
         else
           'Not set'
     }
-    { tmpl: Meteor.isClient and Template.calloutDoneButton }
+    { 
+      tmpl: Meteor.isClient and Template.calloutDoneButton 
+    }
   ]
 
 Tables.CalloutsDone = new Tabular.Table
@@ -106,15 +108,21 @@ if Meteor.isClient
     'submit form': (e) ->
       e.preventDefault()
       callout = @_id
+      signature = ->
+        canvas = document.querySelector 'canvas'
+        canvas.toDataURL()
       data = {
         done: $(e.target).find('[name=done]').is(':checked')
         start: $(e.target).find('[name=start]').val()
         end: $(e.target).find('[name=end]').val()
         cost: $(e.target).find('[name=cost]').val()
         note: $(e.target).find('[name=note]').val()
+        signature: signature()
       }
       Meteor.call 'updateCallout', callout, data
       Router.go 'schedule'
 
   Template.completeCallout.onRendered ->
     @$('.datetimepicker').datetimepicker()
+    canvas = document.querySelector 'canvas'
+    signaturePad = new SignaturePad canvas

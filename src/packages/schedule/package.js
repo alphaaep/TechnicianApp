@@ -20,7 +20,8 @@ Package.onUse(function (api) {
         'aldeed:tabular',
         'manager:callouts',
         'momentjs:moment',
-        'tsega:bootstrap3-datetimepicker@4.14.30_4'
+        'tsega:bootstrap3-datetimepicker@4.14.30_4',
+        'cunneen:signature-pad@1.0.0'
     ]);
     api.addFiles('schedule.jade');
     api.addFiles('schedule.coffee');

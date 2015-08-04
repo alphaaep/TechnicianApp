@@ -90,6 +90,11 @@ template(name="editCallout")
                                     optgroup(label="Technicians")
                                         +each technicians
                                             option(value="{{_id}}" selected="{{isAssigned ../technicianId }}") {{profile.name}}
+                            .form-group
+                                .col-sm-3.control-label Signature
+                                .col-sm-9
+                                    canvas(name='canvas')
+                                    img(src="{{signature}}")
                             .bottom
                                 button.btn.btn-default(type='submit') Save
                                 button.btn.btn-warning(type='reset') Reset

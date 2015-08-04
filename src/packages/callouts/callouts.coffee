@@ -133,6 +133,9 @@ if Meteor.isClient
     'submit form': (e)->
       e.preventDefault()
       callout = @_id
+      signature = ->
+        canvas = document.querySelector 'canvas'
+        canvas.toDataURL()
       data = {
         request: $(e.target).find('[name=request]').val()
         done: $(e.target).find('[name=done]').is(':checked')
@@ -141,11 +144,15 @@ if Meteor.isClient
         hours: $(e.target).find('[name=hours]').val()
         cost: $(e.target).find('[name=cost]').val()
         technicianId: $(e.target).find('[name=technician]').val()
+        signature: signature()
       }
       Meteor.call 'updateCallout', callout, data
       Router.go 'callouts'
+
   Template.editCallout.onRendered ->
     @$('.datetimepicker').datetimepicker()
+    canvas = document.querySelector 'canvas'
+    signaturePad = new SignaturePad canvas
 
 Callouts.after.insert (userId, doc) ->
   Logger.logInsert doc, 'callouts'
