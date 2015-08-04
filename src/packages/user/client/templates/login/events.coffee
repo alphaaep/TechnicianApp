@@ -5,6 +5,7 @@ Template.login.events
     password = $(e.target).find('[name=password]').val()
     Meteor.loginWithPassword user, password, (err)->
       if err
-        console.log('Error: '+err)
+        console.log(err)
+        toastr.error(err.reason, 'Login Error')
       else
         Router.go '/'
